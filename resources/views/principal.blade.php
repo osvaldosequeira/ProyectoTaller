@@ -16,7 +16,8 @@
                     <img src="{{ asset('img/mundial.jpg') }}" alt="CAMISETA MUNDIAL">
                 </div>
                 <div class="CARD-CUERPO">
-                    <h5>CAMISETA RETRO MUNDIAL</h5>
+                    <h5>CAMISETA RETRO </h5>
+                    <h5>MUNDIAL</h5>
                     <p class="PRECIO">$85.000</p>
                     <button class="BTN-COMPRAR">AGREGAR AL CARRITO</button>
                 </div>
@@ -28,7 +29,8 @@
                     <img src="{{ asset('img/libertadores.jpg') }}" alt="CAMISETA LIBERTADORES">
                 </div>
                 <div class="CARD-CUERPO">
-                    <h5>CAMISETA RETRO LIBERTADORES</h5>
+                    <h5>CAMISETA RETRO</h5>
+                    <h5>LIBERTADORES</h5>
                     <p class="PRECIO">$85.000</p>
                     <button class="BTN-COMPRAR">AGREGAR AL CARRITO</button>
                 </div>
@@ -40,7 +42,8 @@
                     <img src="{{ asset('img/champions.jpg') }}" alt="CAMISETA CHAMPIONS">
                 </div>
                 <div class="CARD-CUERPO">
-                    <h5>CAMISETA RETRO CHAMPIONS</h5>
+                    <h5>CAMISETA RETRO</h5>
+                    <h5>CHAMPIONS</h5>
                     <p class="PRECIO">$85.000</p>
                     <button class="BTN-COMPRAR">AGREGAR AL CARRITO</button>
                 </div>
