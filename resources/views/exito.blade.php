@@ -12,7 +12,7 @@
                 </P>
                 
                 <P>
-                    UN MIEMBRO DEL EQUIPO DE <STRONG>ESENCIA RETRO</STRONG> SE PONDRÁ EN CONTACTO CON VOS AL CORREO: 
+                    UN MIEMBRO DEL EQUIPO DE <STRONG>ESENCIA RETRO</STRONG> SE PONDRÁ EN CONTACTO CON USTED AL CORREO: 
                     <BR>
                     <STRONG>{{ $email }}</STRONG>
                 </P>

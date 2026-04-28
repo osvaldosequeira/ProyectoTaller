@@ -46,7 +46,7 @@ navbar {
     BACKGROUND-COLOR: RGBA(255, 255, 255, 0.2) !IMPORTANT; 
 
     /* 1. PROPIEDAD PARA NAVEGADORES WEB-KIT (SAFARI) */
-    -WEBKIT-BACKDROP-FILTER: BLUR(15PX) !IMPORTANT;
+    -webkit-backdrop-filter: blur(15px) !important;
     
     /* 2. PROPIEDAD ESTANDAR (CHROME, FIREFOX, EDGE) */
     BACKDROP-FILTER: BLUR(15PX) !IMPORTANT;
@@ -112,14 +112,23 @@ navbar {
 
 /* BOXES PARA CONTACTO, NOSOTROS, TERMINOS Y EXITO */
 .FORMULARIO-BOX, .CONTENEDOR-INFO, .CONTENEDOR-TERMINOS, .MENSAJE-BOX {
-    BACKGROUND: RGBA(255, 255, 255, 0.6) !IMPORTANT;
-    BACKDROP-FILTER: BLUR(10PX);
-    BORDER-RADIUS: 25PX;
-    PADDING: 40PX;
-    MARGIN: 0 AUTO 50PX AUTO;
-    MAX-WIDTH: 850PX;
-    BORDER: 1PX SOLID RGBA(255, 255, 255, 0.8);
-    BOX-SHADOW: 0 10PX 30PX RGBA(0, 0, 0, 0.05);
+    background: rgba(30, 41, 59, 0.7);
+    
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+
+    border-radius: 25px;
+    padding: 40px;
+    margin: 0 auto 50px auto;
+    max-width: 850px;
+
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+
+    /*letras mas grandes*/
+    font-size: 18px;
+    line-height: 1.7;
+    color: #f1f5f9;
 }
 
 /* =========================================
@@ -150,7 +159,7 @@ navbar {
     BACKGROUND-COLOR: RGBA(255, 255, 255, 0.2) !IMPORTANT;
 
     /* 1. PROPIEDAD PARA NAVEGADORES WEB-KIT (SAFARI) */
-    -WEBKIT-BACKDROP-FILTER: BLUR(10PX) !IMPORTANT;
+    -webkit-backdrop-filter: blur(10px) !important;
     
     /* 2. PROPIEDAD ESTANDAR (CHROME, FIREFOX, EDGE) */
     BACKDROP-FILTER: BLUR(10PX) !IMPORTANT;
@@ -228,25 +237,29 @@ INPUT, TEXTAREA {
 }
 
 /* ESTILO ACORDEON TERMINOS */
-.ACCORDION-ITEM {
-    BACKGROUND-COLOR: RGBA(255, 255, 255, 0.3) !IMPORTANT;
-    MARGIN-BOTTOM: 10PX;
-    BORDER-RADIUS: 12PX !IMPORTANT;
-    BORDER: 1PX SOLID RGBA(0,0,0,0.1) !IMPORTANT;
-    OVERFLOW: HIDDEN;
+.accordion-item {
+    background-color: rgba(15, 23, 42, 0.6) !important;
+    margin-bottom: 10px;
+    border-radius: 12px !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    overflow: hidden;
 }
 
-.ACCORDION-BUTTON {
-    BACKGROUND-COLOR: TRANSPARENT !IMPORTANT;
-    COLOR: #000000 !IMPORTANT;
-    FONT-WEIGHT: 900 !IMPORTANT;
-    TEXT-TRANSFORM: UPPERCASE;
-    BOX-SHADOW: NONE !IMPORTANT;
+.accordion-button {
+    background: rgba(30, 41, 59, 0.7) !important;
+    color: #f1f5f9 !important;
+    font-weight: 900 !important;
+    text-transform: uppercase;
+    box-shadow: none !important;
 }
 
-.ACCORDION-BUTTON:NOT(.COLLAPSED) {
-    COLOR: #1976D2 !IMPORTANT;
-    BACKGROUND-COLOR: RGBA(25, 118, 210, 0.05) !IMPORTANT;
+.accordion-button:hover {
+    background: rgba(30, 41, 59, 0.9) !important;
+}
+
+.accordion-button:not(.collapsed) {
+    background: rgba(15, 23, 42, 0.9) !important;
+    color: #60a5fa !important;
 }
 
 /* =========================================
@@ -258,4 +271,11 @@ INPUT, TEXTAREA {
     TEXT-ALIGN: CENTER;
     BORDER-TOP: 1PX SOLID RGBA(0, 0, 0, 0.1);
     MARGIN-TOP: AUTO;
+}
+
+.CONTENEDOR-TERMINOS,
+.CONTENEDOR-TERMINOS p,
+.CONTENEDOR-TERMINOS li,
+.CONTENEDOR-TERMINOS span {
+    color: #f1f5f9 !important;
 }
