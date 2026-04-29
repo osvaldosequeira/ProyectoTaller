@@ -1,32 +1,32 @@
-<!-- Barra de navegación principal del sitio -->
+<!-- Barra de navegación principal con Glassmorphism -->
 <nav class="navbar navbar-expand-lg">
-    
-    <!-- Contenedor que centra el contenido horizontalmente -->
-    <div class="container justify-content-center">
-        
-        <!-- Lista de enlaces de navegación -->
-        <ul class="navbar-nav">
-            
-            <!-- Enlace a la página de inicio -->
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url('/') }}">INICIO</a>
-            </li>
-            
-            <!-- Enlace a la página Quiénes somos -->
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url('/quienes-somos') }}">NOSOTROS</a>
-            </li>
-            
-            <!-- Enlace a la página de contacto -->
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url('/contacto') }}">CONTACTO</a>
-            </li>
-            
-            <!-- Enlace a los términos y condiciones -->
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url('/terminos') }}">TÉRMINOS</a>
-            </li>
-        
-        </ul>
+    <div class="container">
+        <!-- Logo de la marca -->
+<a class="navbar-brand" href="{{ url('/') }}">
+    <img src="{{ asset('img/logo.png') }}" alt="Esencia Retro Logo" class="logo-navbar">
+</a>
+
+        <!-- Botón de Hamburguesa (Solo se ve en celulares) -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menuEsencia" aria-controls="menuEsencia" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Contenedor de los links que se colapsan -->
+        <div class="collapse navbar-collapse" id="menuEsencia">
+            <ul class="navbar-nav ms-auto text-center">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('/') }}">INICIO</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('/quienes-somos') }}">NOSOTROS</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('/contacto') }}">CONTACTO</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('/terminos') }}">TÉRMINOS</a>
+                </li>
+            </ul>
+        </div>
     </div>
 </nav>

@@ -79,10 +79,10 @@
 
     <!-- Sección del equipo de trabajo -->
     <section class="seccion-staff">
-        <h4>Nuestro Staff</h4>
+        <h4>       Nuestro Staff</h4>
         
         <!-- Fila para mostrar el equipo -->
-        <div class="row text-center">
+        <div >
             
             <!-- Columna de fundadores -->
             <div class="col-md-6">
@@ -91,11 +91,11 @@
                     <p>Fundadores</p>
                 </div>
             </div>
-            
+            <h4>       Secciones</h4>
             <!-- Columna del equipo-->
             <div class="col-md-6">
                 <div class="staff-card">
-                    <h6>Equipo de Curaduría</h6>
+                    <h6>Equipo de diseño</h6>
                     <p>Especialistas Vintage</p>
                 </div>
             </div>
