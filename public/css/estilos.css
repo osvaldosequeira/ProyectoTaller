@@ -279,3 +279,9 @@ INPUT, TEXTAREA {
 .CONTENEDOR-TERMINOS span {
     color: #f1f5f9 !important;
 }
+
+.seccion-texto p {
+    text-align: justify;
+    line-height: 1.6;   /* espacio entre líneas */
+    margin-bottom: 15px;
+}
