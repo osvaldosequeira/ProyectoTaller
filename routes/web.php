@@ -38,3 +38,10 @@ Route::post('/contacto', function (Illuminate\Http\Request $request) {
     // AQUÍ CONECTA CON EXITO.BLADE.PHP
     return view('exito', compact('nombre', 'email', 'mensaje'));
 });
+
+use App\Http\Controllers\RolController;
+use App\Http\Controllers\UsuarioController;
+
+Route::get('/roles', [RolController::class, 'index'])->name('roles.index');
+
+Route::get('/usuarios', [UsuarioController::class, 'index'])->name('usuarios.index');
