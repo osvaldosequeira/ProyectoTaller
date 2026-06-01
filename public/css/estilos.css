@@ -12,7 +12,7 @@
 }
 html, body {
     width: 100%;
-    background: linear-gradient(135deg, #E3F2FD 0%, #BBDEFB 50%, #E1F5FE 100%);
+    background: linear-gradient(135deg, #336186 0%, #336186 50%, #336186 100%);
     background-attachment: fixed;
     color: #000000;
     display: flex;
@@ -29,7 +29,7 @@ body {
 /* =========================================
    2. NAVBAR (ESTILO REFINADO)
    ========================================= */
-nav.navbar {
+nav.navbar { 
     position: fixed;
     top: 0;
     left: 0;
@@ -231,7 +231,7 @@ input, textarea {
     border-radius: 10px;
     background: rgba(255, 255, 255, 0.9);
     font-family: 'Libre Baskerville', serif;
-    color: #000000;
+    color: #fdfafa;
 }
 
 /* =========================================
@@ -270,7 +270,7 @@ input, textarea {
    8. FOOTER Y RESPONSIVE
    ========================================= */
 .FOOTER-PRINCIPAL {
-    background-color: rgba(255, 255, 255, 0.5);
+      background: linear-gradient(135deg, #336186 0%, #336186 50%, #336186 100%);
     padding: 40px 0;
     text-align: center;
     border-top: 1px solid rgba(0, 0, 0, 0.1);
@@ -301,3 +301,29 @@ input, textarea {
         box-shadow: 0 10px 30px rgba(0,0,0,0.1);
     }
 }
+ .carousel-container-custom{
+        height: 500px;
+          background: linear-gradient(135deg, #336186 0%, #336186 50%, #336186 100%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .carousel-poster{
+        height: 90%;
+        width: auto;
+        object-fit: contain;
+        border-radius: 12px;
+        box-shadow: 0px 0px 20px rgba(0,0,0,0.5);
+        transition: transform 0.4s ease;
+    }
+
+    .carousel-poster:hover{
+        transform: scale(1.02);
+    }
+
+    .carousel-caption-custom{
+        background: rgba(15, 23, 42, 0.75);
+        border-radius: 15px;
+        padding: 18px;
+    }

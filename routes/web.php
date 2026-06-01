@@ -3,6 +3,12 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
+use App\Http\Controllers\RolController;
+use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\ProductoController;
+
+// use App\Http\Controllers\CarritoController;
+
 /*
 |--------------------------------------------------------------------------
 | RUTAS DE LA APLICACION - ESENCIA RETRO
@@ -24,24 +30,42 @@ Route::get('/terminos', function () {
     return view('terminos');
 });
 
-// ESTA RUTA ES PARA MOSTRAR EL FORMULARIO
+// 4. RUTA DE CONTACTO (FORMULARIO)
 Route::get('/contacto', function () {
     return view('contacto');
 });
 
-// ESTA RUTA ES PARA RECIBIR LOS DATOS Y MOSTRAR ÉXITO
-Route::post('/contacto', function (Illuminate\Http\Request $request) {
+// 5. RUTA DE CATALOGO
+// El catálogo muestra los productos traídos desde MariaDB
+Route::get('/catalogo', [ProductoController::class, 'index']);
+
+// 6. RUTA DE COMERCIALIZACION
+Route::get('/comercializacion', function () {
+    return view('comercializacion');
+});
+
+// 7. RUTA DEL CARRITO
+// Route::get('/carrito', [CarritoController::class, 'showCarrito']);
+
+Route::get('/carrito', function () {
+    return view('comercializacion');
+});
+
+// 8. RUTA PARA RECIBIR LOS DATOS DEL FORMULARIO
+Route::post('/contacto', function (Request $request) {
+
     $nombre = $request->input('nombre');
     $email = $request->input('email');
     $mensaje = $request->input('mensaje');
 
-    // AQUÍ CONECTA CON EXITO.BLADE.PHP
+    // MUESTRA LA VISTA EXITO.BLADE.PHP
     return view('exito', compact('nombre', 'email', 'mensaje'));
 });
 
-use App\Http\Controllers\RolController;
-use App\Http\Controllers\UsuarioController;
+// 9. RUTAS DE ROLES
+Route::get('/roles', [RolController::class, 'index'])
+    ->name('roles.index');
 
-Route::get('/roles', [RolController::class, 'index'])->name('roles.index');
-
-Route::get('/usuarios', [UsuarioController::class, 'index'])->name('usuarios.index');
+// 10. RUTAS DE USUARIOS
+Route::get('/usuarios', [UsuarioController::class, 'index'])
+    ->name('usuarios.index');

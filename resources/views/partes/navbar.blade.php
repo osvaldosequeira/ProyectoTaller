@@ -26,6 +26,12 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ url('/terminos') }}">TÉRMINOS</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('/comercializacion') }}">COMERCIALIZACION</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('/catalgo') }}">CATALOGO</a>
+                </li>
             </ul>
         </div>
     </div>
