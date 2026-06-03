@@ -45,9 +45,12 @@ use Illuminate\Support\Str;
                             ${{ number_format($producto->precio, 2, ',', '.') }}
                         </p>
 
-                        <a href="{{ url('/carrito') }}" class="BTN-COMPRAR">
-                            Seleccionar Artículo
-                        </a>
+                        <form action="{{ route('carrito.agregar', $producto->id) }}" method="POST">
+    @csrf
+    <button type="submit" class="BTN-COMPRAR w-100 border-0">
+       Seleccionar Artículo
+    </button>
+</form>
                     </div>
 
                 </div>

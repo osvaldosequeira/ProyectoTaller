@@ -7,7 +7,7 @@ use App\Http\Controllers\RolController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\ProductoController;
 
-// use App\Http\Controllers\CarritoController;
+use App\Http\Controllers\CarritoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -43,12 +43,16 @@ Route::get('/comercializacion', function () {
     return view('comercializacion');
 });
 
-// 7. RUTA DEL CARRITO
-// Route::get('/carrito', [CarritoController::class, 'showCarrito']);
 
-Route::get('/carrito', function () {
-    return view('comercializacion');
-});
+
+// Cambiamos la ruta de comercialización para que pase por el controlador
+Route::get('/comercializacion', [CarritoController::class, 'showCarrito'])->name('carrito.show');
+
+// Ruta tipo POST para añadir el producto al carrito desde el botón del catálogo
+Route::post('/carrito/agregar/{id}', [CarritoController::class, 'agregar'])->name('carrito.agregar');
+
+// Ruta para finalizar la compra
+Route::post('/carrito/confirmar', [CarritoController::class, 'confirmarCompra'])->name('carrito.confirmar');
 
 // 8. RUTA PARA RECIBIR LOS DATOS DEL FORMULARIO
 Route::post('/contacto', function (Request $request) {
