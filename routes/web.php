@@ -11,104 +11,62 @@ use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
-| RUTAS DE LA APLICACION - ESENCIA RETRO
+| RUTAS DE LA APLICACIÓN - ESENCIA RETRO
 |--------------------------------------------------------------------------
 */
 
-// 1. RUTA DE LA PAGINA PRINCIPAL (INICIO)
-Route::get('/', function () {
-    return view('principal');
-});
+// --- 1. RUTAS PÚBLICAS (ACCESO GLOBAL) ---
+Route::get('/', function () { return view('principal'); });
+Route::get('/quienes-somos', function () { return view('quienes-somos'); });
+Route::get('/terminos', function () { return view('terminos'); });
+Route::get('/contacto', function () { return view('contacto'); });
 
-// 2. RUTA DE QUIENES SOMOS (NOSOTROS)
-Route::get('/quienes-somos', function () {
-    return view('quienes-somos');
-});
+// --- 2. RUTAS DE AUTENTICACIÓN ---
+Route::get('/login', function () { return view('login'); })->name('login');
+Route::get('/registro', function () { return view('registro'); })->name('registro');
 
-// 3. RUTA DE TERMINOS Y CONDICIONES
-Route::get('/terminos', function () {
-    return view('terminos');
-});
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/registro', [AuthController::class, 'registro']);
+Route::post('/logout', [AuthController::class, 'logout']);
 
-// 4. RUTA DE CONTACTO (FORMULARIO)
-Route::get('/contacto', function () {
-    return view('contacto');
-});
-
-// 5. RUTAS DEL CATÁLOGO
-// Faltaba esta línea para cargar la grilla de productos desde MariaDB:
+// --- 3. RUTAS DEL CATÁLOGO ---
 Route::get('/catalogo', [ProductoController::class, 'index'])->name('producto.index');
-
-// Ruta para ver el detalle de la Mystery Box seleccionada
 Route::get('/catalogo/{id}', [ProductoController::class, 'show'])->name('producto.show');
-// 6. RUTA DE COMERCIALIZACION
-Route::get('/comercializacion', [CarritoController::class, 'showCarrito'])
-    ->name('carrito.show');
 
-// 7. RUTA DEL CARRITO
-Route::get('/carrito', [CarritoController::class, 'showCarrito']);
+// --- 4. RUTAS DEL CARRITO Y COMERCIALIZACIÓN ---
+Route::get('/comercializacion', [CarritoController::class, 'showCarrito'])->name('carrito.show');
+Route::post('/carrito/agregar/{id}', [CarritoController::class, 'agregar'])->name('carrito.agregar');
+Route::delete('/carrito/eliminar/{id}', [CarritoController::class, 'eliminar'])->name('carrito.eliminar');
+Route::post('/carrito/confirmar', [CarritoController::class, 'confirmarCompra'])->name('carrito.confirmar');
 
-// 8. RUTA PARA AGREGAR PRODUCTOS AL CARRITO
-Route::post('/carrito/agregar/{id}', [CarritoController::class, 'agregar'])
-    ->name('carrito.agregar');
-
-// 9. RUTA PARA ELIMINAR PRODUCTOS DEL CARRITO
-Route::delete('/carrito/eliminar/{id}', [CarritoController::class, 'eliminar'])
-    ->name('carrito.eliminar');
-
-// 10. RUTA PARA CONFIRMAR LA COMPRA
-Route::post('/carrito/confirmar', [CarritoController::class, 'confirmarCompra'])
-    ->name('carrito.confirmar');
-
-// 11. RUTA PARA RECIBIR LOS DATOS DEL FORMULARIO
+// --- 5. PROCESAMIENTO DE CONTACTO ---
 Route::post('/contacto', function (Request $request) {
-
     $nombre = $request->input('nombre');
     $email = $request->input('email');
     $mensaje = $request->input('mensaje');
-
     return view('exito', compact('nombre', 'email', 'mensaje'));
 });
 
-// ... Tus rutas anteriores de inicio, catálogo y login se mantienen exactamente igual ...
-
-// 12. RUTAS DE ADMINISTRACIÓN PROTEGIDAS (Only Admins)
+// --- 6. RUTAS DE ADMINISTRACIÓN PROTEGIDAS (SOLO ADMINS) ---
 Route::middleware([\App\Http\Middleware\AdminMiddleware::class])->group(function () {
     
-    // El Dashboard Principal (Página de inicio del Admin con gráficos y totales)
+    // Dashboard Principal
     Route::get('/admin/dashboard', [UsuarioController::class, 'dashboard'])->name('admin.dashboard');
     
-    // Rutas que ya tenías de usuarios y roles
-    Route::get('/roles', [RolController::class, 'index'])->name('roles.index');
+    // Gestión de Usuarios (ABM Simplificado)
     Route::get('/usuarios', [UsuarioController::class, 'index'])->name('usuarios.index');
+    Route::get('/usuarios/{usuario}/edit', [UsuarioController::class, 'edit'])->name('usuarios.edit');
+    Route::put('/usuarios/{usuario}', [UsuarioController::class, 'update'])->name('usuarios.update');
+    Route::delete('/usuarios/{usuario}', [UsuarioController::class, 'destroy'])->name('usuarios.destroy');
     
-    // CRUD / ABM de Productos (Crear, Editar, Borrar Mystery Boxes)
+    // Gestión de Productos (ABM de Mystery Boxes)
     Route::get('/admin/productos', [ProductoController::class, 'adminIndex'])->name('admin.productos.index');
     Route::get('/admin/productos/crear', [ProductoController::class, 'create'])->name('admin.productos.create');
     Route::post('/admin/productos', [ProductoController::class, 'store'])->name('admin.productos.store');
     Route::get('/admin/productos/{id}/editar', [ProductoController::class, 'edit'])->name('admin.productos.edit');
     Route::put('/admin/productos/{id}', [ProductoController::class, 'update'])->name('admin.productos.update');
     Route::delete('/admin/productos/{id}', [ProductoController::class, 'destroy'])->name('admin.productos.destroy');
+
+    // Roles (Opcional, si decidís mantener la vista por separado)
+    Route::get('/roles', [RolController::class, 'index'])->name('roles.index');
 });
-// 13. RUTAS DE USUARIOS
-Route::get('/usuarios', [UsuarioController::class, 'index'])
-    ->name('usuarios.index');
-
-// 14. RUTA REGISTRO
-Route::get('/registro', function () {
-    return view('registro');
-});
-
-// 15. RUTA LOGIN
-Route::get('/login', function () {
-    return view('login');
-});
-
-// 16. LOGIN REAL
-Route::post('/login', [AuthController::class, 'login']);
-
-// 17. REGISTRO REAL
-Route::post('/registro', [AuthController::class, 'registro']);
-
-// 18. LOGOUT
-Route::post('/logout', [AuthController::class, 'logout']);

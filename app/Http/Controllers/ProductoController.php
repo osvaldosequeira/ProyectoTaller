@@ -15,7 +15,12 @@ class ProductoController extends Controller
         $productos = Producto::all();
         return view('catalogo', compact('productos'));
     }
-
+public function adminIndex()
+{
+    $productos = Producto::all();
+    // Apuntamos a tu carpeta real: backend/admin/productos/index.blade.php
+    return view('backend.admin.productos.index', compact('productos'));
+}
     /**
      * Muestra el detalle interactivo de una Mystery Box.
      */

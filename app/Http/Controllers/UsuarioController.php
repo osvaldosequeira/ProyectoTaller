@@ -2,102 +2,80 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Usuario;
-use App\Models\Rol;
+use App\Models\User;
+use App\Models\Producto;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UsuarioController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * DASHBOARD: Métricas generales para Osvaldo Admin
+     */
+    public function dashboard()
+    {
+        // Conteo dinámico de la base de datos
+        $totalUsuarios = User::count();
+        $totalProductos = Producto::count();
+        $totalAdmins = User::where('es_admin', 1)->count();
+        
+        // Simulación de ingresos para el Taller
+        $totalVentasComerciales = 345000.00; 
+
+        // Auditoría de registros recientes
+        $ultimosUsuarios = User::orderBy('created_at', 'desc')->take(5)->get();
+
+        return view('backend.admin.dashboard', compact('totalUsuarios', 'totalProductos', 'totalAdmins', 'totalVentasComerciales', 'ultimosUsuarios'));
+    }
+
+    /**
+     * Listado de usuarios para gestión interna
      */
     public function index()
     {
-        $usuarios = Usuario::with('rol')->get();
-
+        $usuarios = User::all();
         return view('backend.admin.usuarios.index', compact('usuarios'));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Formulario para editar datos y cambiar ROL
      */
-    public function create()
+    public function edit(User $usuario)
     {
-        $roles = Rol::all();
-
-        return view('backend.admin.usuarios.create', compact('roles'));
+        return view('admin.usuarios.edit', compact('usuario'));
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Actualización de datos y permisos (es_admin)
      */
-    public function store(Request $request)
+    public function update(Request $request, User $usuario)
     {
         $request->validate([
-            'nombre' => 'required|string|max:100',
-            'email' => 'required|email|unique:usuarios',
-            'password' => 'required|min:8|confirmed',
-            'rol_id' => 'required|exists:roles,id',
+            'name' => 'required|string|max:100',
+            'email' => 'required|email|unique:users,email,' . $usuario->id,
+            'es_admin' => 'required|boolean', // Permite alternar entre Cliente (0) y Admin (1)
         ]);
 
-        Usuario::create($request->only([
-            'nombre',
-            'email',
-            'password',
-            'rol_id'
-        ]));
-
-        return redirect()->route('usuarios.index')
-                         ->with('exito', 'Usuario creado correctamente');
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Usuario $usuario)
-    {
-        return view('backend.admin.usuarios.show', compact('usuario'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Usuario $usuario)
-    {
-        $roles = Rol::all();
-
-        return view('backend.admin.usuarios.edit', compact('usuario', 'roles'));
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Usuario $usuario)
-    {
-        $request->validate([
-            'nombre' => 'required|string|max:100',
-            'email' => 'required|email|unique:usuarios,email,' . $usuario->id,
-            'rol_id' => 'required|exists:roles,id',
+        $usuario->update([
+            'name' => $request->name,
+            'email' => $request->email,
+            'es_admin' => $request->es_admin,
         ]);
 
-        $usuario->update($request->only([
-            'nombre',
-            'email',
-            'rol_id'
-        ]));
-
-        return redirect()->route('usuarios.index')
-                         ->with('exito', 'Usuario actualizado correctamente');
+        return redirect()->route('usuarios.index')->with('exito', 'Usuario actualizado con éxito.');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Eliminación de cuenta de usuario
      */
-    public function destroy(Usuario $usuario)
+    public function destroy(User $usuario)
     {
+        // Evitar que el admin se borre a sí mismo por error
+        if ($usuario->id === Auth::id()) {
+            return back()->with('error', 'No podés eliminar tu propia cuenta de administrador.');
+        }
+
         $usuario->delete();
-
-        return redirect()->route('usuarios.index')
-                         ->with('exito', 'Usuario eliminado correctamente');
+        return redirect()->route('usuarios.index')->with('exito', 'Usuario eliminado correctamente.');
     }
 }
