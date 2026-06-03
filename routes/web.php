@@ -37,7 +37,8 @@ Route::get('/contacto', function () {
 
 // 5. RUTA DE CATALOGO (Corregida para conectarse con MariaDB)
 Route::get('/catalogo', [ProductoController::class, 'index']);
-
+// Ruta para eliminar un ítem del carrito
+Route::delete('/carrito/eliminar/{id}', [CarritoController::class, 'eliminar'])->name('carrito.eliminar');
 // 6. RUTA DE COMERCIALIZACION
 Route::get('/comercializacion', function () {
     return view('comercializacion');

@@ -53,7 +53,21 @@ class CarritoController extends Controller
 
         return view('comercializacion', compact('carrito', 'total'));
     }
+/**
+     * Elimina un artículo completo del carrito en la sesión.
+     */
+    public function eliminar($id)
+    {
+        $carrito = session()->get('carrito', []);
 
+        // Si el producto existe en la sesión, lo removemos con unset
+        if (isset($carrito[$id])) {
+            unset($carrito[$id]);
+            session()->put('carrito', $carrito);
+        }
+
+        return redirect()->back()->with('exito', '¡Artículo removido del carrito!');
+    }
     /**
      * Procesa la compra e impacta en MariaDB.
      */
