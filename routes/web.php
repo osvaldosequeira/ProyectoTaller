@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\RolController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\ProductoController;
-
 use App\Http\Controllers\CarritoController;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,41 +35,61 @@ Route::get('/contacto', function () {
     return view('contacto');
 });
 
-// 5. RUTA DE CATALOGO (Corregida para conectarse con MariaDB)
+// 5. RUTA DE CATALOGO
 Route::get('/catalogo', [ProductoController::class, 'index']);
-// Ruta para eliminar un ítem del carrito
-Route::delete('/carrito/eliminar/{id}', [CarritoController::class, 'eliminar'])->name('carrito.eliminar');
+
 // 6. RUTA DE COMERCIALIZACION
-Route::get('/comercializacion', function () {
-    return view('comercializacion');
-});
+Route::get('/comercializacion', [CarritoController::class, 'showCarrito'])
+    ->name('carrito.show');
 
+// 7. RUTA DEL CARRITO
+Route::get('/carrito', [CarritoController::class, 'showCarrito']);
 
+// 8. RUTA PARA AGREGAR PRODUCTOS AL CARRITO
+Route::post('/carrito/agregar/{id}', [CarritoController::class, 'agregar'])
+    ->name('carrito.agregar');
 
-// Cambiamos la ruta de comercialización para que pase por el controlador
-Route::get('/comercializacion', [CarritoController::class, 'showCarrito'])->name('carrito.show');
+// 9. RUTA PARA ELIMINAR PRODUCTOS DEL CARRITO
+Route::delete('/carrito/eliminar/{id}', [CarritoController::class, 'eliminar'])
+    ->name('carrito.eliminar');
 
-// Ruta tipo POST para añadir el producto al carrito desde el botón del catálogo
-Route::post('/carrito/agregar/{id}', [CarritoController::class, 'agregar'])->name('carrito.agregar');
+// 10. RUTA PARA CONFIRMAR LA COMPRA
+Route::post('/carrito/confirmar', [CarritoController::class, 'confirmarCompra'])
+    ->name('carrito.confirmar');
 
-// Ruta para finalizar la compra
-Route::post('/carrito/confirmar', [CarritoController::class, 'confirmarCompra'])->name('carrito.confirmar');
-
-// 8. RUTA PARA RECIBIR LOS DATOS DEL FORMULARIO
+// 11. RUTA PARA RECIBIR LOS DATOS DEL FORMULARIO
 Route::post('/contacto', function (Request $request) {
 
     $nombre = $request->input('nombre');
     $email = $request->input('email');
     $mensaje = $request->input('mensaje');
 
-    // MUESTRA LA VISTA EXITO.BLADE.PHP
     return view('exito', compact('nombre', 'email', 'mensaje'));
 });
 
-// 9. RUTAS DE ROLES
+// 12. RUTAS DE ROLES
 Route::get('/roles', [RolController::class, 'index'])
     ->name('roles.index');
 
-// 10. RUTAS DE USUARIOS
+// 13. RUTAS DE USUARIOS
 Route::get('/usuarios', [UsuarioController::class, 'index'])
     ->name('usuarios.index');
+
+// 14. RUTA REGISTRO
+Route::get('/registro', function () {
+    return view('registro');
+});
+
+// 15. RUTA LOGIN
+Route::get('/login', function () {
+    return view('login');
+});
+
+// 16. LOGIN REAL
+Route::post('/login', [AuthController::class, 'login']);
+
+// 17. REGISTRO REAL
+Route::post('/registro', [AuthController::class, 'registro']);
+
+// 18. LOGOUT
+Route::post('/logout', [AuthController::class, 'logout']);
