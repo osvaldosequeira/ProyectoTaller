@@ -35,8 +35,7 @@ Route::get('/contacto', function () {
     return view('contacto');
 });
 
-// 5. RUTA DE CATALOGO
-// El catálogo muestra los productos traídos desde MariaDB
+// 5. RUTA DE CATALOGO (Corregida para conectarse con MariaDB)
 Route::get('/catalogo', [ProductoController::class, 'index']);
 
 // 6. RUTA DE COMERCIALIZACION
