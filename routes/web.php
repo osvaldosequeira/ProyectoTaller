@@ -70,10 +70,26 @@ Route::post('/contacto', function (Request $request) {
     return view('exito', compact('nombre', 'email', 'mensaje'));
 });
 
-// 12. RUTAS DE ROLES
-Route::get('/roles', [RolController::class, 'index'])
-    ->name('roles.index');
+// ... Tus rutas anteriores de inicio, catálogo y login se mantienen exactamente igual ...
 
+// 12. RUTAS DE ADMINISTRACIÓN PROTEGIDAS (Only Admins)
+Route::middleware([\App\Http\Middleware\AdminMiddleware::class])->group(function () {
+    
+    // El Dashboard Principal (Página de inicio del Admin con gráficos y totales)
+    Route::get('/admin/dashboard', [UsuarioController::class, 'dashboard'])->name('admin.dashboard');
+    
+    // Rutas que ya tenías de usuarios y roles
+    Route::get('/roles', [RolController::class, 'index'])->name('roles.index');
+    Route::get('/usuarios', [UsuarioController::class, 'index'])->name('usuarios.index');
+    
+    // CRUD / ABM de Productos (Crear, Editar, Borrar Mystery Boxes)
+    Route::get('/admin/productos', [ProductoController::class, 'adminIndex'])->name('admin.productos.index');
+    Route::get('/admin/productos/crear', [ProductoController::class, 'create'])->name('admin.productos.create');
+    Route::post('/admin/productos', [ProductoController::class, 'store'])->name('admin.productos.store');
+    Route::get('/admin/productos/{id}/editar', [ProductoController::class, 'edit'])->name('admin.productos.edit');
+    Route::put('/admin/productos/{id}', [ProductoController::class, 'update'])->name('admin.productos.update');
+    Route::delete('/admin/productos/{id}', [ProductoController::class, 'destroy'])->name('admin.productos.destroy');
+});
 // 13. RUTAS DE USUARIOS
 Route::get('/usuarios', [UsuarioController::class, 'index'])
     ->name('usuarios.index');
