@@ -13,30 +13,38 @@ class CarritoController extends Controller
      * Añade un producto al carrito guardándolo en la sesión.
      */
     public function agregar(Request $request, $id)
-    {
-        $producto = Producto::findOrFail($id);
-        
-        // Juntamos el carrito actual de la sesión (si no existe, iniciamos un array vacío)
-        $carrito = session()->get('carrito', []);
+{
+    $producto = Producto::findOrFail($id);
+    $tamanio = $request->input('tamanio', 'Pequeña'); // Captura el tamaño elegido
 
-        // Si el producto ya está en el carrito, sumamos la cantidad
-        if(isset($carrito[$id])) {
-            $carrito[$id]['cantidad']++;
-        } else {
-            // Si es nuevo, lo agregamos con sus datos esenciales
-            $carrito[$id] = [
-                "nombre" => $producto->nombre,
-                "cantidad" => 1,
-                "precio" => $producto->precio,
-                "imagen" => $producto->imagen
-            ];
-        }
+    // Definimos los costos adicionales según el tamaño
+    $extras = [
+        'Pequeña' => 0,
+        'Mediana' => 15000,
+        'Grande'  => 30000
+    ];
 
-        // Guardamos el carrito actualizado en la sesión
-        session()->put('carrito', $carrito);
+    $precioFinal = $producto->precio + $extras[$tamanio]; // Suma el extra al precio base
+    
+    $carrito = session()->get('carrito', []);
 
-        return redirect()->back()->with('exito', '¡Producto añadido al carrito!');
+    // Creamos una clave única que combine ID y Tamaño para permitir diferentes tamaños del mismo producto
+    $itemKey = $id . '_' . $tamanio;
+
+    if(isset($carrito[$itemKey])) {
+        $carrito[$itemKey]['cantidad']++;
+    } else {
+        $carrito[$itemKey] = [
+            "nombre" => $producto->nombre . " (" . $tamanio . ")",
+            "cantidad" => 1,
+            "precio" => $precioFinal,
+            "imagen" => $producto->imagen
+        ];
     }
+
+    session()->put('carrito', $carrito);
+    return redirect()->route('carrito.show')->with('exito', '¡' . $tamanio . ' añadida con éxito!');
+}
 
     /**
      * Muestra la página de comercialización con los datos reales de la sesión.

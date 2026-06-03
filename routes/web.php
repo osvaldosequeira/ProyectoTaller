@@ -35,9 +35,12 @@ Route::get('/contacto', function () {
     return view('contacto');
 });
 
-// 5. RUTA DE CATALOGO
-Route::get('/catalogo', [ProductoController::class, 'index']);
+// 5. RUTAS DEL CATÁLOGO
+// Faltaba esta línea para cargar la grilla de productos desde MariaDB:
+Route::get('/catalogo', [ProductoController::class, 'index'])->name('producto.index');
 
+// Ruta para ver el detalle de la Mystery Box seleccionada
+Route::get('/catalogo/{id}', [ProductoController::class, 'show'])->name('producto.show');
 // 6. RUTA DE COMERCIALIZACION
 Route::get('/comercializacion', [CarritoController::class, 'showCarrito'])
     ->name('carrito.show');
