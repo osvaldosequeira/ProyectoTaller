@@ -327,3 +327,688 @@ input, textarea {
         border-radius: 15px;
         padding: 18px;
     }
+
+
+/* ==========================
+   NAVBAR ESENCIA RETRO
+========================== */
+
+.NAVBAR-ESENCIA{
+    background: rgba(15,23,42,.8);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+
+    border-bottom: 1px solid rgba(255,255,255,.1);
+
+    padding:.8rem 1rem;
+}
+
+.LOGO-NAVBAR{
+    height:50px;
+    object-fit:contain;
+}
+
+.FUENTE-NAVBAR{
+    font-family:'Playfair Display', serif;
+}
+
+.NAV-LINK-ESENCIA{
+    color:white !important;
+
+    text-transform:uppercase;
+
+    font-size:.8rem;
+
+    font-weight:700;
+
+    padding-left:.9rem !important;
+    padding-right:.9rem !important;
+
+    transition:.25s;
+}
+
+.NAV-LINK-ESENCIA:hover{
+    color:#38bdf8 !important;
+}
+
+.ICONO-USUARIO{
+    color:white !important;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+}
+
+.ICONO-CARRITO{
+    color:white !important;
+
+    display:inline-block;
+
+    padding:.5rem;
+}
+
+/* ==========================
+   BADGE CARRITO
+========================== */
+
+.BADGE-CARRITO{
+    font-size:.65rem;
+
+    top:0;
+
+    right:-2px;
+
+    padding:.3em .5em;
+
+    position:absolute;
+}
+
+/* ==========================
+   MENÚ USUARIO
+========================== */
+
+.dropdown-menu{
+
+    background:rgba(30,41,59,.98);
+
+    border:1px solid rgba(255,255,255,.1);
+
+    overflow:hidden;
+
+    min-width:220px;
+}
+
+.dropdown-divider{
+
+    border-color:rgba(255,255,255,.1);
+}
+
+.MENU-USUARIO-NOMBRE{
+
+    color:#cbd5e1;
+
+    font-weight:700;
+
+    padding:.75rem 1rem;
+}
+
+.MENU-USUARIO-ITEM{
+
+    color:#f1f5f9 !important;
+
+    font-weight:600;
+
+    transition:.25s;
+}
+
+.MENU-USUARIO-ITEM:hover{
+
+    background:rgba(59,130,246,.15);
+
+    color:#38bdf8 !important;
+}
+
+.BTN-CERRAR-SESION{
+
+    width:100%;
+
+    border:none;
+
+    background:transparent;
+
+    text-align:left;
+
+    padding:.5rem 1rem;
+}
+
+/* ==========================
+   CATALOGO PRODUCTOS
+========================== */
+
+.TITULO-CATALOGO{
+    font-family:'Playfair Display', serif;
+}
+
+.SUBTITULO-CATALOGO{
+    letter-spacing:2px;
+}
+
+.CARD-PRODUCTO{
+
+    background:rgba(30,41,59,.5);
+
+    backdrop-filter:blur(10px);
+
+    border-radius:20px;
+
+    border:1px solid rgba(255,255,255,.1);
+
+    height:100%;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:space-between;
+
+    transition:transform .3s ease;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.2);
+}
+
+.CARD-PRODUCTO:hover{
+
+    transform:translateY(-6px);
+}
+
+.IMG-PRODUCTO{
+
+    max-height:240px;
+
+    object-fit:contain;
+
+    border-radius:15px;
+}
+
+.TITULO-PRODUCTO{
+
+    font-family:'Playfair Display', serif;
+
+    font-size:1.15rem;
+
+    min-height:55px;
+}
+
+.DESCRIPCION-PRODUCTO{
+
+    min-height:65px;
+
+    text-align:justify;
+}
+
+.BTN-COMPRAR{
+
+    border-radius:10px;
+
+    transition:.3s;
+}
+
+.ICONO-BOTON{
+
+    vertical-align:middle;
+}
+
+.CONTENEDOR-INFO{
+
+    background:rgba(30,41,59,.6);
+
+    border-radius:20px;
+
+    border:1px solid rgba(255,255,255,.1);
+}
+
+.MENSAJE-VACIO{
+
+    color:#94a3b8;
+
+    font-size:1.2rem;
+}
+
+.SUBMENSAJE-VACIO{
+
+    color:#94a3b8;
+}
+
+/* ==========================
+   COMERCIALIZACION
+========================== */
+
+.TITULO-COMERCIAL{
+
+    font-family:'Playfair Display', serif;
+
+}
+
+.SUBTITULO-COMERCIAL{
+
+    letter-spacing:2px;
+
+}
+
+.CONTENEDOR-CARRITO{
+
+    background:rgba(30,41,59,.8);
+
+    backdrop-filter:blur(15px);
+
+    border-radius:20px;
+
+    border:1px solid rgba(255,255,255,.1);
+
+    box-shadow:0 10px 30px rgba(0,0,0,.3);
+
+}
+
+.PANEL-LATERAL{
+
+    min-height:400px;
+
+}
+
+.TITULO-BLOQUE{
+
+    color:white;
+
+    font-family:'Playfair Display', serif;
+
+}
+
+.ICONO-MEDIO{
+
+    vertical-align:middle;
+
+}
+
+.TABLA-CARRITO{
+
+    background:rgba(15,23,42,.5);
+
+    border-radius:15px;
+
+    overflow:hidden;
+
+}
+
+.ENCABEZADO-TABLA{
+
+    text-transform:uppercase;
+
+    opacity:.75;
+
+    font-family:'Playfair Display', serif;
+
+    font-size:.9rem;
+
+}
+
+.FILA-CARRITO{
+
+    border-bottom:1px solid rgba(255,255,255,.15);
+
+}
+
+.IMG-CARRITO{
+
+    width:60px;
+
+    height:60px;
+
+    object-fit:cover;
+
+    border-radius:10px;
+
+    border:1px solid rgba(255,255,255,.2);
+
+}
+
+.NOMBRE-PRODUCTO{
+
+    font-size:.85rem;
+
+    max-width:200px;
+
+    font-weight:700;
+
+    text-transform:uppercase;
+
+}
+
+.TOTAL-CARRITO{
+
+    color:white;
+
+    font-family:'Playfair Display', serif;
+
+}
+
+.TOTAL-PRECIO{
+
+    color:#22c55e;
+
+    font-size:2rem;
+
+    margin-left:.5rem;
+
+}
+
+.DESCRIPCION-LOGISTICA{
+
+    text-align:justify;
+
+    line-height:1.7;
+
+    opacity:.9;
+
+}
+
+.BTN-CONFIRMAR{
+
+    border-radius:12px;
+
+}
+
+/* ==========================
+   LOGIN
+========================== */
+
+.CONTENEDOR-LOGIN{
+
+    max-width:550px;
+
+    background:rgba(30,41,59,.85);
+
+    backdrop-filter:blur(15px);
+
+    border-radius:20px;
+
+    border:1px solid rgba(255,255,255,.1);
+
+    box-shadow:0 15px 40px rgba(0,0,0,.4);
+
+    padding:2.5rem;
+}
+
+.TITULO-LOGIN{
+
+    color:white;
+
+    letter-spacing:2px;
+
+    font-family:'Playfair Display', serif;
+}
+
+.ALERTA-LOGIN{
+
+    border-radius:12px;
+
+    background:rgba(220,53,69,.2);
+
+    border:1px solid rgba(220,53,69,.4);
+
+    color:#f8d7da;
+}
+
+.LISTA-ERRORES{
+
+    padding-left:20px;
+}
+
+.LABEL-LOGIN{
+
+    color:#cbd5e1;
+}
+
+.INPUT-LOGIN{
+
+    background:rgba(15,23,42,.8) !important;
+
+    border:1px solid rgba(148,163,184,.3);
+
+    border-radius:12px;
+
+    padding:12px;
+}
+
+.INPUT-LOGIN:focus{
+
+    background:rgba(15,23,42,.95);
+
+    color:white;
+
+    border-color:#38bdf8;
+
+    box-shadow:none;
+}
+
+.BTN-LOGIN{
+
+    background:linear-gradient(
+        135deg,
+        #0ea5e9,
+        #2563eb
+    );
+
+    color:white;
+
+    border-radius:12px;
+
+    letter-spacing:1px;
+
+    transition:.3s;
+}
+
+.BTN-LOGIN:hover{
+
+    transform:translateY(-2px);
+}
+
+.TEXTO-REGISTRO{
+
+    color:#94a3b8;
+}
+
+.LINK-REGISTRO{
+
+    color:#38bdf8;
+}
+
+/* ==========================
+   MYSTERY BOX
+========================== */
+
+.CONTENEDOR-MYSTERY{
+
+    background:rgba(30,41,59,.8);
+
+    border-radius:20px;
+
+    border:1px solid rgba(255,255,255,.1);
+
+}
+
+.IMG-MYSTERY{
+
+    max-height:300px;
+
+    object-fit:contain;
+
+    border-radius:15px;
+}
+
+.TITULO-MYSTERY{
+
+    font-family:'Playfair Display', serif;
+}
+
+.DESCRIPCION-MYSTERY{
+
+    text-align:justify;
+}
+
+.TITULO-SECCION-MYSTERY{
+
+    font-family:'Playfair Display', serif;
+}
+
+.CARD-TAMANIO{
+
+    width:100%;
+
+    padding:.8rem;
+
+    display:block;
+
+    text-align:center;
+
+    cursor:pointer;
+
+    background:rgba(15,23,42,.5);
+
+    border:1px solid rgba(255,255,255,.2);
+
+    border-radius:15px;
+
+    transition:.3s;
+}
+
+.CARD-TAMANIO:hover{
+
+    transform:translateY(-4px);
+
+    border-color:#38bdf8;
+}
+
+.IMG-TAMANIO{
+
+    max-height:100px;
+}
+
+.BTN-MYSTERY{
+
+    border-radius:12px;
+}
+
+.TABLA-MYSTERY{
+
+    background:rgba(15,23,42,.5);
+
+    border-radius:15px;
+
+    overflow:hidden;
+}
+
+.HEADER-MYSTERY{
+
+    text-transform:uppercase;
+
+    font-size:.85rem;
+
+    opacity:.75;
+}
+
+.FILA-MYSTERY{
+
+    border-bottom:1px solid rgba(255,255,255,.12);
+}
+
+/* ==========================
+   REGISTRO
+========================== */
+
+.CONTENEDOR-REGISTRO{
+
+    max-width:600px;
+
+    background:rgba(30,41,59,.85);
+
+    backdrop-filter:blur(15px);
+
+    border-radius:20px;
+
+    border:1px solid rgba(255,255,255,.1);
+
+    box-shadow:0 15px 40px rgba(0,0,0,.4);
+
+    padding:2.5rem;
+}
+
+.TITULO-REGISTRO{
+
+    color:white;
+
+    letter-spacing:2px;
+
+    font-family:'Playfair Display', serif;
+}
+
+.ALERTA-REGISTRO{
+
+    border-radius:12px;
+
+    background:rgba(220,53,69,.2);
+
+    border:1px solid rgba(220,53,69,.4);
+
+    color:#f8d7da;
+}
+
+.LISTA-ERRORES{
+
+    padding-left:20px;
+}
+
+.LABEL-REGISTRO{
+
+    color:#cbd5e1;
+}
+
+.INPUT-REGISTRO{
+
+    background:rgba(15,23,42,.8) !important;
+
+    border:1px solid rgba(148,163,184,.3);
+
+    border-radius:12px;
+
+    padding:12px;
+}
+
+.INPUT-REGISTRO:focus{
+
+    background:rgba(15,23,42,.95);
+
+    color:white;
+
+    border-color:#38bdf8;
+
+    box-shadow:none;
+}
+
+.INFO-PASSWORD{
+
+    color:#94a3b8;
+}
+
+.BTN-REGISTRO{
+
+    background:linear-gradient(
+        135deg,
+        #0ea5e9,
+        #2563eb
+    );
+
+    color:white;
+
+    border-radius:12px;
+
+    letter-spacing:1px;
+
+    transition:.3s;
+}
+
+.BTN-REGISTRO:hover{
+
+    transform:translateY(-2px);
+}
+
+.TEXTO-LOGIN{
+
+    color:#94a3b8;
+}
+
+.LINK-LOGIN{
+
+    color:#38bdf8;
+}
