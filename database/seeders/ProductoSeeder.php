@@ -23,7 +23,7 @@ class ProductoSeeder extends Seeder
         // Producto 2: Caja Internacional
         Producto::create([
             'nombre' => 'Mystery Box - Joyas Internacionales',
-            'precio' => 65000.00,
+            'precio' => 68000.00,
             'imagen' => 'caja_internacional.png',
             'descripcion' => 'Prendas históricas de los clubes más grandes de Europa y el mundo.'
         ]);
@@ -31,7 +31,7 @@ class ProductoSeeder extends Seeder
         // Producto 3: Caja de la Selección
         Producto::create([
             'nombre' => 'Mystery Box - Selección Argentina',
-            'precio' => 55000.00,
+            'precio' => 56000.00,
             'imagen' => 'caja_seleccion.png',
             'descripcion' => 'Casacas y prendas oficiales que marcaron la historia de nuestra selección.'
         ]);

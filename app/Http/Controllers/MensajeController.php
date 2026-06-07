@@ -1,0 +1,57 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Mensaje; // ✅ SOLUCIÓN AL ERROR: Importación obligatoria
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth; // Necesario para detectar si está logueado
+
+class MensajeController extends Controller
+{
+    /**
+     * Listar todos los mensajes en el Panel de Administración (Backend)
+     */
+    public function index()
+    {
+        $mensajes = Mensaje::with('usuario')->orderBy('created_at', 'desc')->get();
+        return view('backend.admin.mensajes.index', compact('mensajes'));
+    }
+
+    /**
+     * Procesar el formulario de contacto público y guardarlo en MariaDB (Frontend)
+     */
+    public function storePublic(Request $request)
+    {
+        $request->validate([
+            'nombre' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'mensaje' => 'required|string',
+        ]);
+
+        // LÓGICA INTELIGENTE: Si está logueado guarda su ID, sino guarda null (Anónimo)
+        Mensaje::create([
+            'user_id' => Auth::check() ? Auth::id() : null,
+            'nombre' => $request->input('nombre'),
+            'email' => $request->input('email'),
+            'mensaje' => $request->input('mensaje'),
+        ]);
+
+        $nombre = $request->input('nombre');
+        $email = $request->input('email');
+        $mensaje = $request->input('mensaje');
+
+        // Renderiza tu vista de éxito real pasando las variables
+        return view('exito', compact('nombre', 'email', 'mensaje'));
+    }
+
+    /**
+     * Eliminar un mensaje de la base de datos
+     */
+    public function destroy($id)
+    {
+        $mensaje = Mensaje::findOrFail($id);
+        $mensaje->delete();
+
+        return redirect()->route('admin.mensajes.index')->with('exito', 'El mensaje fue eliminado correctamente.');
+    }
+}

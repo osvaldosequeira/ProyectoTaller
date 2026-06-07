@@ -4,16 +4,25 @@
 <div class="container my-5 text-white">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2 class="fw-bold text-uppercase" style="font-family: 'Playfair Display', serif;">Gestión de Usuarios</h2>
+        <a href="{{ route('usuarios.create') }}" class="btn btn-warning fw-bold text-uppercase">Nuevo Usuario</a>
     </div>
 
     @if(session('exito'))
-        <div class="alert alert-success bg-success text-white border-0 mb-4">{{ session('exito') }}</div>
+        <div class="alert alert-success border-0 shadow mb-4" style="background: rgba(34, 197, 94, 0.2); color: #22c55e; border-radius: 12px; font-weight: 600;">
+            👤 {{ session('exito') }}
+        </div>
+    @endif
+
+    @if(session('error'))
+        <div class="alert alert-danger border-0 shadow mb-4" style="background: rgba(220, 53, 69, 0.2); color: #f8d7da; border-radius: 12px; font-weight: 600;">
+            ⚠️ {{ session('error') }}
+        </div>
     @endif
 
     <div class="table-responsive p-4" style="background: rgba(30, 41, 59, 0.8); border-radius: 20px; border: 1px solid rgba(255,255,255,0.1);">
         <table class="table table-dark align-middle">
             <thead>
-                <tr class="text-uppercase small opacity-50">
+                <tr class="text-uppercase small opacity-50" style="font-family: 'Playfair Display', serif;">
                     <th>Nombre</th>
                     <th>Email</th>
                     <th>Rol</th>
@@ -21,21 +30,26 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($usuarios as $u)
-                <tr>
-                    <td>{{ $u->name }}</td>
-                    <td>{{ $u->email }}</td>
+                @foreach($usuarios as $user)
+                <tr class="FILA-MYSTERY">
+                    <td class="fw-bold text-white">{{ $user->name }}</td>
+                    <td>{{ $user->email }}</td>
                     <td>
-                        <span class="badge {{ $u->es_admin ? 'bg-danger' : 'bg-secondary' }}">
-                            {{ $u->es_admin ? 'ADMIN' : 'CLIENTE' }}
-                        </span>
+                        @if($user->es_admin == 1)
+                            <span class="badge bg-danger text-uppercase px-2 py-1" style="border-radius: 6px; font-size: 0.75rem;">Admin</span>
+                        @else
+                            <span class="badge bg-secondary text-uppercase px-2 py-1" style="border-radius: 6px; font-size: 0.75rem;">Cliente</span>
+                        @endif
                     </td>
                     <td class="text-center">
                         <div class="d-flex justify-content-center gap-2">
-                            <a href="{{ route('usuarios.edit', $u->id) }}" class="btn btn-sm btn-outline-info">Editar / Rol</a>
-                            <form action="{{ route('usuarios.destroy', $u->id) }}" method="POST" onsubmit="return confirm('¿Eliminar este usuario?')">
-                                @csrf @method('DELETE')
-                                <button type="submit" class="btn btn-sm btn-outline-danger">Eliminar</button>
+                            <a href="{{ route('usuarios.edit', $user->id) }}" class="btn btn-sm btn-outline-info fw-bold">Editar / Rol</a>
+                            
+                            <form action="{{ route('usuarios.destroy', $user->id) }}" method="POST" 
+                                  onsubmit="return confirm('¿Seguro que querés eliminar permanentemente a {{ $user->name }} del sistema?')">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-sm btn-outline-danger fw-bold">Eliminar</button>
                             </form>
                         </div>
                     </td>

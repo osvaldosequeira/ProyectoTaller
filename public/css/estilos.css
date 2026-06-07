@@ -1,20 +1,19 @@
-/* =========================================
-   1. RESETEO TOTAL Y FUENTES (FORMAL)
-   ========================================= */
-@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&display=swap');
+/* ==========================================================================
+   1. CONFIGURACIÓN BASE, FUENTES Y RESETEO
+   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Playfair+Display:wght@700;900&display=swap');
 
 * {
-    /* Esta es la línea que cambia todo el texto a la fuente formal */
-    font-family: 'Libre Baskerville', serif !important;
     box-sizing: border-box;
     margin: 0;
     padding: 0;
 }
+
 html, body {
     width: 100%;
-    background: linear-gradient(135deg, #336186 0%, #336186 50%, #336186 100%);
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
     background-attachment: fixed;
-    color: #000000;
+    color: #f1f5f9;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
@@ -22,993 +21,319 @@ html, body {
     font-family: 'Libre Baskerville', serif;
 }
 
-body {
-    padding-top: 70px; 
+body { padding-top: 85px; }
+
+/* Tipografías Distinguidas - Color Blanco Puro para Lectura Firme */
+.HEADER-PRINCIPAL h1, .TITULO-SECCION, .TITULO-CATALOGO, .TITULO-COMERCIAL, 
+.TITULO-LOGIN, .TITULO-REGISTRO, .TITULO-MYSTERY, .TITULO-SECCION-MYSTERY, 
+.TITULO-BLOQUE, .TOTAL-CARRITO, .ENCABEZADO-TABLA, .HEADER-MYSTERY, .FUENTE-NAVBAR {
+    font-family: 'Playfair Display', serif;
+    text-transform: uppercase;
+    color: #ffffff !important;
 }
 
-/* =========================================
-   2. NAVBAR (ESTILO REFINADO)
-   ========================================= */
-nav.navbar { 
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 2000;
-    margin: 0;
-    background-color: rgba(255, 255, 255, 0.2); 
+.HEADER-PRINCIPAL h1 { font-size: 3.5rem; font-weight: 900; letter-spacing: 5px; }
+.SUBTITULO-CATALOGO, .SUBTITULO-COMERCIAL { letter-spacing: 2px; color: #94a3b8 !important; }
+
+/* ==========================================================================
+   2. CONTENEDORES GLASSMORPHISM (Solución de Texto Oscuro)
+   ========================================================================== */
+.FORMULARIO-BOX, .CONTENEDOR-INFO, .CONTENEDOR-TERMINOS, .MENSAJE-BOX, 
+.CONTENEDOR-CARRITO, .CONTENEDOR-LOGIN, .CONTENEDOR-REGISTRO, .CONTENEDOR-MYSTERY {
+    background: rgba(30, 41, 59, 0.85); /* Un poco más opaco para dar contraste */
     -webkit-backdrop-filter: blur(15px);
     backdrop-filter: blur(15px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-}
-
-.navbar .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.logo-navbar {
-    height: 50px;
-    width: auto;
-    transition: transform 0.3s ease;
-}
-
-.logo-navbar:hover {
-    transform: scale(1.05);
-}
-
-.navbar .nav-link {
-    color: #000000;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    padding: 15px 20px;
-    transition: 0.3s;
-}
-
-.navbar .nav-link:hover {
-    color: #1976D2;
-}
-
-.navbar-toggler {
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    background-color: rgba(255, 255, 255, 0.3);
-}
-
-/* =========================================
-   3. HEADER Y TEXTOS
-   ========================================= */
-.HEADER-PRINCIPAL {
-    text-align: center;
-    padding: 20px 0;
-    width: 100%;
-}
-
-.HEADER-PRINCIPAL h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: 3.5rem;
-    font-weight: 900;
-    text-transform: uppercase;
-    letter-spacing: 5px;
-    margin: 0;
-}
-
-.HERO-SECTION {
-    text-align: center;
-    margin-bottom: 40px;
-    padding: 0 15px;
-}
-
-.HERO-SECTION h2 {
-    font-family: 'Playfair Display', serif;
-    font-weight: 900;
-}
-
-/* =========================================
-   4. ESTRUCTURA Y CONTENEDORES
-   ========================================= */
-.CUERPO-PRINCIPAL {
-    flex: 1 0 auto;
-    padding: 30px 0;
-}
-
-.FORMULARIO-BOX, .CONTENEDOR-INFO, .CONTENEDOR-TERMINOS, .MENSAJE-BOX {
-    background: rgba(30, 41, 59, 0.7);
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
-    border-radius: 25px;
+    border-radius: 20px;
     padding: 40px;
     margin: 0 auto 50px auto;
     max-width: 850px;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    font-size: 18px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+    font-size: 17px;
     line-height: 1.7;
-    color: #f1f5f9;
-    text-align: justify;
+    color: #f1f5f9 !important; /* Fuerza a que todo párrafo sea claro */
 }
 
-/* Forzar justificado sin !important usando mayor especificidad */
-.CUERPO-PRINCIPAL .CONTENEDOR-INFO p, 
-.CUERPO-PRINCIPAL .CONTENEDOR-TERMINOS p, 
-.CUERPO-PRINCIPAL .CONTENEDOR-TERMINOS li {
-    text-align: justify;
-    color: #f1f5f9;
-    margin-bottom: 15px;
+/* Forzar textos legibles dentro de cualquier contenedor de información */
+.CUERPO-PRINCIPAL p, .DESCRIPCION-LOGISTICA, .DESCRIPCION-MYSTERY, .CARD-PRODUCTO p, .accordion-body { 
+    text-align: justify; 
+    color: #e2e8f0 !important; /* Color gris platino de alta lectura */
 }
-/* =========================================
-   5. CATÁLOGO (TARJETAS DE PRODUCTO)
-   ========================================= */
-.TITULO-SECCION {
-    text-align: center;
+
+.CONTENEDOR-LOGIN { max-width: 550px; }
+.CONTENEDOR-REGISTRO { max-width: 600px; }
+
+/* ==========================================================================
+   3. NAVBAR NATIVA Y DROPDOWN
+   ========================================================================== */
+nav.navbar, .NAVBAR-ESENCIA {
+    position: fixed; top: 0; left: 0; width: 100%; z-index: 2000; margin: 0;
+    background: rgba(15, 23, 42, 0.9) !important;
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding: .8rem 1rem;
+}
+.navbar .nav-link, .NAV-LINK-ESENCIA {
+    color: white !important; text-transform: uppercase; font-size: .85rem; font-weight: 700;
+    padding: 10px 15px !important; transition: .25s;
+}
+.navbar .nav-link:hover, .NAV-LINK-ESENCIA:hover { color: #38bdf8 !important; }
+.LOGO-NAVBAR, .logo-navbar { height: 50px; object-fit: contain; transition: .3s; }
+.dropdown-item-text, 
+.MENU-USUARIO-NOMBRE,
+span.dropdown-item-text {
+    color: #f59e0b !important; /* Color dorado/ámbar vibrante de alta visibilidad */
+    font-weight: 700 !important;
     font-family: 'Playfair Display', serif;
-    font-weight: 900;
-    text-transform: uppercase;
-    margin-bottom: 40px;
-    letter-spacing: 3px;
-}
-
-.CARD-PRODUCTO {
-    background-color: rgba(255, 255, 255, 0.2);
-    -webkit-backdrop-filter: blur(10px);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    border-radius: 25px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-    transition: all 0.3s ease;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-.CARD-PRODUCTO:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
-    background-color: rgba(255, 255, 255, 0.3);
-}
-
-.IMG-CONTAINER {
-    width: 100%;
-    height: 280px; 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: transparent; 
-    padding: 20px;
-}
-
-.IMG-CONTAINER img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
-}
-
-.CARD-CUERPO {
-    padding: 20px;
-    text-align: center;
-    flex-grow: 1;
-}
-
-.PRECIO {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.8rem;
-    font-weight: 900;
-    margin: 15px 0;
-    color: #000000;
-}
-
-/* =========================================
-   6. COMPONENTES: BOTONES E INPUTS
-   ========================================= */
-.BTN-COMPRAR, .BTN-ENVIAR, .LINK-VOLVER {
-    background-color: #000000;
-    color: #FFFFFF;
-    border: none;
-    padding: 15px;
-    font-family: 'Libre Baskerville', serif;
-    font-weight: 700;
-    text-transform: uppercase;
-    border-radius: 10px;
-    width: 100%;
-    text-decoration: none;
+    letter-spacing: 1px;
+    padding: 0.75rem 1rem;
     display: block;
-    text-align: center;
-    transition: 0.3s;
-    cursor: pointer;
 }
+.dropdown-menu { background: rgba(30, 41, 59, .98); border: 1px solid rgba(255, 255, 255, .15); min-width: 220px; }
+.MENU-USUARIO-ITEM { color: #f1f5f9 !important; font-weight: 600; }
+.MENU-USUARIO-ITEM:hover { background: rgba(59, 130, 246, .15); color: #38bdf8 !important; }
 
-.BTN-COMPRAR:hover, .BTN-ENVIAR:hover {
-    background-color: #333333;
-    transform: scale(1.02);
+/* ==========================================================================
+   4. CATÁLOGO, PRECIOS IMPACTANTES Y SELECCIÓN DE PRODUCTO
+   ========================================================================== */
+.CARD-PRODUCTO {
+    background: rgba(15, 23, 42, 0.6); 
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1); 
+    border-radius: 20px;
+    height: 100%; display: flex; flex-direction: column; justify-content: space-between;
+    transition: transform .3s ease, border-color .3s ease; box-shadow: 0 10px 25px rgba(0, 0, 0, .3); padding: 25px;
 }
+.CARD-PRODUCTO:hover { transform: translateY(-6px); border-color: #38bdf8; }
 
-input, textarea {
+/* Manejo de imágenes rotas o desalineadas en el catálogo */
+.IMG-PRODUCTO, .IMG-CONTAINER img, .IMG-MYSTERY { 
+    max-height: 240px; 
     width: 100%;
-    padding: 12px;
-    margin-bottom: 20px;
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
-    background: rgba(255, 255, 255, 0.9);
-    font-family: 'Libre Baskerville', serif;
-    color: #fdfafa;
-}
-
-/* =========================================
-   7. ACORDEÓN DE TÉRMINOS (CORREGIDO)
-   ========================================= */
-.accordion-item {
-    background-color: rgba(15, 23, 42, 0.6);
+    object-fit: contain; 
+    border-radius: 15px; 
     margin-bottom: 15px;
-    border-radius: 15px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    overflow: hidden;
+    display: block;
 }
 
-.accordion-button {
-    background-color: rgba(30, 41, 59, 0.8);
-    color: #f1f5f9;
+.TITULO-PRODUCTO { font-size: 1.2rem; font-weight: 700; color: #ffffff !important; text-align: center; margin-bottom: 12px; }
+
+/* SOLUCIÓN ERROR DE PRECIOS OCULTOS: Verde Esmeralda Vibrante y Comercial */
+.PRECIO { 
     font-family: 'Playfair Display', serif;
-    font-weight: 700;
-    text-transform: uppercase;
-    box-shadow: none;
-    border: none;
+    font-size: 2rem; 
+    font-weight: 900; 
+    color: #22c55e !important; 
+    text-align: center !important; /* Fuerza el texto al medio */
+    width: 100% !important;        /* Ocupa todo el ancho disponible */
+    display: block !important;     /* Se comporta como bloque para poder centrarse */
+    margin: 15px 0 !important;
+    text-shadow: 0 2px 10px rgba(34, 197, 94, 0.2);
 }
 
-.accordion-button:not(.collapsed) {
-    background-color: rgba(15, 23, 42, 0.9);
-    color: #f1f5f9;
+/* SOLUCIÓN SELECCIÓN DE PRODUCTOS: Resaltado de Caja Activa Eficaz */
+.CARD-TAMANIO {
+    width: 100%; padding: 1.2rem; display: block; text-align: center; cursor: pointer;
+    background: rgba(15, 23, 42, 0.7); border: 2px solid rgba(255, 255, 255, 0.15);
+    border-radius: 15px; transition: all 0.3s ease; color: white; text-decoration: none;
+}
+/* Efecto cuando pasa el mouse por encima */
+.CARD-TAMANIO:hover { border-color: #0ea5e9; transform: translateY(-3px); }
+
+/* Cuando la tarjeta de tamaño está SELECCIONADA (Estilo dinámico brillante) */
+.CARD-TAMANIO.active, input[type="radio"]:checked + .CARD-TAMANIO, .border-primary {
+    border: 3px solid #38bdf8 !important; /* Borde celeste neón grueso */
+    background: rgba(56, 189, 248, 0.15) !important; /* Fondo con sutil brillo celeste */
+    box-shadow: 0 0 20px rgba(56, 189, 248, 0.4); /* Resplandor exterior */
 }
 
-.accordion-body {
-    color: #f1f5f9;
-    text-align: justify;
+/* Tablas Comerciales */
+.TABLA-CARRITO .IMG-CARRITO, 
+.table .IMG-CARRITO,
+td img[src*="caja"] { 
+    width: 80px !important;       /* Tamaño ideal para tarjetas de tabla */
+    height: 80px !important;      /* Mantiene la proporción cuadrada */
+    object-fit: contain !important; /* Evita que la Mystery Box se deforme */
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: rgba(15, 23, 42, 0.4);
+    display: inline-block;
+    vertical-align: middle;
+}
+/* ==========================================================================
+   5. COMPONENTES: INPUTS CON PLACEHOLDERS LEGIBLES Y BOTONES
+   ========================================================================== */
+input, textarea, select, .INPUT-LOGIN, .INPUT-REGISTRO {
+    width: 100%; padding: 12px; margin-bottom: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 10px;
+    background: rgba(15, 23, 42, 0.8) !important; color: #ffffff !important;
+    font-family: 'Libre Baskerville', serif; transition: border-color .3s;
+}
+input:focus, textarea:focus, select:focus { border-color: #38bdf8; outline: none; }
+
+/* SOLUCIÓN PLACEHOLDERS OSCUROS: Color claro de alta visibilidad para las guías de texto */
+input::placeholder, textarea::placeholder {
+    color: #94a3b8 !important; /* Gris claro nítido */
+    opacity: 1 !important;
+}
+
+/* Botones Unificados */
+.BTN-COMPRAR, .BTN-ENVIAR, .BTN-LOGIN, .BTN-REGISTRO, .BTN-CONFIRMAR, .BTN-MYSTERY {
+    background: linear-gradient(135deg, #0ea5e9 0%, #2563eb 100%);
+    color: white !important; border: none; padding: 15px; font-family: 'Libre Baskerville', serif;
+    font-weight: 700; text-transform: uppercase; border-radius: 12px; width: 100%;
+    text-decoration: none; display: block; text-align: center; transition: .3s; cursor: pointer;
+}
+.BTN-COMPRAR:hover, .BTN-ENVIAR:hover, .BTN-CONFIRMAR:hover, .BTN-MYSTERY:hover {
+    transform: translateY(-2px); filter: brightness(1.1); box-shadow: 0 5px 15px rgba(37, 99, 235, 0.4);
+}
+
+/* ==========================================================================
+   6. COMPONENTES DE TERCEROS (ACORDEÓN DE TÉRMINOS REPARADO)
+   ========================================================================== */
+.accordion-item { 
+    background-color: rgba(15, 23, 42, 0.7) !important; 
+    margin-bottom: 15px; border-radius: 15px; 
+    border: 1px solid rgba(255, 255, 255, 0.1); overflow: hidden; 
+}
+.accordion-button { 
+    background-color: rgba(30, 41, 59, 0.9) !important; 
+    color: #ffffff !important; 
+    font-family: 'Playfair Display', serif; font-weight: 700; text-transform: uppercase; 
+}
+.accordion-button:not(.collapsed) { 
+    background-color: rgba(15, 23, 42, 0.95) !important; 
+    color: #38bdf8 !important; 
+}
+
+/* SOLUCIÓN COMPLETA PARA EL TEXTO DEL ACORDEÓN INVISIBLE */
+.accordion-body, .accordion-body p { 
+    color: #f1f5f9 !important; /* Obliga al texto a ser blanco plateado */
+    background-color: rgba(15, 23, 42, 0.4) !important;
+    font-size: 16px;
     line-height: 1.8;
 }
 
-/* =========================================
-   8. FOOTER Y RESPONSIVE
-   ========================================= */
+/* Footer y Tablas Administrativas */
+.table { color: #f1f5f9 !important; }
+.table-hover tbody tr:hover { background-color: rgba(255, 255, 255, 0.07) !important; }
 .FOOTER-PRINCIPAL {
-      background: linear-gradient(135deg, #336186 0%, #336186 50%, #336186 100%);
-    padding: 40px 0;
-    text-align: center;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
-    margin-top: auto;
+    background: rgba(15, 23, 42, 0.95);
+    padding: 30px 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    color: #94a3b8;
+    width: 100% !important;
 }
 
+/* Responsive */
 @media (max-width: 768px) {
-    body {
-        padding-top: 65px;
+    body { padding-top: 65px; }
+    .HEADER-PRINCIPAL h1 { font-size: 1.8rem; letter-spacing: 2px; }
+    .FORMULARIO-BOX, .CONTENEDOR-INFO, .CONTENEDOR-TERMINOS { padding: 25px; margin: 15px; }
+    .navbar-collapse { background-color: rgba(30, 41, 59, 0.98); backdrop-filter: blur(15px); margin-top: 15px; padding: 20px; border-radius: 20px; }
+}
+/* ==========================================================================
+   PARCHE DEFINITIVO: CENTRADO MILIMÉTRICO DEL CAPTION
+   ========================================================================== */
+.carousel-container-custom { 
+    height: 580px; 
+    display: flex !important; 
+    flex-direction: column !important; 
+    justify-content: flex-start; /* Alinea los elementos al inicio del contenedor */
+    align-items: center; 
+    position: relative;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.carousel-poster { 
+    height: 350px !important; 
+    width: auto !important; 
+    object-fit: contain !important; 
+    border-radius: 12px; 
+    box-shadow: 0px 10px 30px rgba(0,0,0,0.7); 
+    transition: transform 0.4s ease;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+/* Rediseño con posicionamiento absoluto para forzar el centro real */
+.carousel-caption-custom { 
+    position: absolute !important;
+    bottom: 25px !important; /* Distancia fija desde el piso del carrusel */
+    left: 50% !important;   /* Lo mueve al centro de la pantalla */
+    transform: translateX(-50%) !important; /* Truco de CSS para centrarlo perfecto según su propio ancho */
+    background: rgba(15, 23, 42, 0.85); 
+    border-radius: 15px; 
+    padding: 15px 30px;
+    max-width: 650px; 
+    width: 90%;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+    z-index: 10;
+}
+
+/* Asegurar el centrado del texto interno */
+.carousel-caption-custom h3, 
+.carousel-caption-custom h2,
+.carousel-caption-custom p {
+    text-align: center !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+.carousel-caption-custom h3 {
+    font-family: 'Playfair Display', serif;
+    color: #ffffff !important;
+    text-transform: uppercase;
+    font-size: 1.4rem;
+    margin-bottom: 6px;
+    letter-spacing: 2px;
+}
+
+.carousel-caption-custom p {
+    color: #cbd5e1 !important; 
+    font-size: 0.95rem;
+    margin: 0;
+}
+
+/* Ajuste responsive para celulares */
+@media (max-width: 768px) {
+    .carousel-container-custom {
+        height: 480px;
     }
-
-    .HEADER-PRINCIPAL h1 {
-        font-size: 1.8rem;
-        letter-spacing: 2px;
+    .carousel-poster {
+        height: 250px !important;
     }
-
-    .FORMULARIO-BOX, .CONTENEDOR-INFO, .CONTENEDOR-TERMINOS {
-        padding: 25px;
-        margin: 15px;
+    .carousel-caption-custom {
+        width: 95%;
+        padding: 10px 15px;
+        bottom: 15px !important;
     }
-
-    .navbar-collapse {
-        background-color: rgba(227, 242, 253, 0.98); 
-        backdrop-filter: blur(15px);
-        margin-top: 15px;
-        padding: 20px;
-        border-radius: 20px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    .carousel-caption-custom h3 {
+        font-size: 1.1rem;
     }
 }
- .carousel-container-custom{
-        height: 500px;
-          background: linear-gradient(135deg, #336186 0%, #336186 50%, #336186 100%);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .carousel-poster{
-        height: 90%;
-        width: auto;
-        object-fit: contain;
-        border-radius: 12px;
-        box-shadow: 0px 0px 20px rgba(0,0,0,0.5);
-        transition: transform 0.4s ease;
-    }
-
-    .carousel-poster:hover{
-        transform: scale(1.02);
-    }
-
-    .carousel-caption-custom{
-        background: rgba(15, 23, 42, 0.75);
-        border-radius: 15px;
-        padding: 18px;
-    }
-
-
-/* ==========================
-   NAVBAR ESENCIA RETRO
-========================== */
-
-.NAVBAR-ESENCIA{
-    background: rgba(15,23,42,.8);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-
-    border-bottom: 1px solid rgba(255,255,255,.1);
-
-    padding:.8rem 1rem;
-}
-
-.LOGO-NAVBAR{
-    height:50px;
-    object-fit:contain;
-}
-
-.FUENTE-NAVBAR{
-    font-family:'Playfair Display', serif;
-}
-
-.NAV-LINK-ESENCIA{
-    color:white !important;
-
-    text-transform:uppercase;
-
-    font-size:.8rem;
-
-    font-weight:700;
-
-    padding-left:.9rem !important;
-    padding-right:.9rem !important;
-
-    transition:.25s;
-}
-
-.NAV-LINK-ESENCIA:hover{
-    color:#38bdf8 !important;
-}
-
-.ICONO-USUARIO{
-    color:white !important;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-}
-
-.ICONO-CARRITO{
-    color:white !important;
-
-    display:inline-block;
-
-    padding:.5rem;
-}
-
-/* ==========================
-   BADGE CARRITO
-========================== */
-
-.BADGE-CARRITO{
-    font-size:.65rem;
-
-    top:0;
-
-    right:-2px;
-
-    padding:.3em .5em;
-
-    position:absolute;
-}
-
-/* ==========================
-   MENÚ USUARIO
-========================== */
-
-.dropdown-menu{
-
-    background:rgba(30,41,59,.98);
-
-    border:1px solid rgba(255,255,255,.1);
-
-    overflow:hidden;
-
-    min-width:220px;
-}
-
-.dropdown-divider{
-
-    border-color:rgba(255,255,255,.1);
-}
-
-.MENU-USUARIO-NOMBRE{
-
-    color:#cbd5e1;
-
-    font-weight:700;
-
-    padding:.75rem 1rem;
-}
-
-.MENU-USUARIO-ITEM{
-
-    color:#f1f5f9 !important;
-
-    font-weight:600;
-
-    transition:.25s;
-}
-
-.MENU-USUARIO-ITEM:hover{
-
-    background:rgba(59,130,246,.15);
-
-    color:#38bdf8 !important;
-}
-
-.BTN-CERRAR-SESION{
-
-    width:100%;
-
-    border:none;
-
-    background:transparent;
-
-    text-align:left;
-
-    padding:.5rem 1rem;
-}
-
-/* ==========================
-   CATALOGO PRODUCTOS
-========================== */
-
-.TITULO-CATALOGO{
-    font-family:'Playfair Display', serif;
-}
-
-.SUBTITULO-CATALOGO{
-    letter-spacing:2px;
-}
-
-.CARD-PRODUCTO{
-
-    background:rgba(30,41,59,.5);
-
-    backdrop-filter:blur(10px);
-
-    border-radius:20px;
-
-    border:1px solid rgba(255,255,255,.1);
-
-    height:100%;
-
-    display:flex;
-
-    flex-direction:column;
-
-    justify-content:space-between;
-
-    transition:transform .3s ease;
-
-    box-shadow:0 10px 25px rgba(0,0,0,.2);
-}
-
-.CARD-PRODUCTO:hover{
-
-    transform:translateY(-6px);
-}
-
-.IMG-PRODUCTO{
-
-    max-height:240px;
-
-    object-fit:contain;
-
-    border-radius:15px;
-}
-
-.TITULO-PRODUCTO{
-
-    font-family:'Playfair Display', serif;
-
-    font-size:1.15rem;
-
-    min-height:55px;
-}
-
-.DESCRIPCION-PRODUCTO{
-
-    min-height:65px;
-
-    text-align:justify;
-}
-
-.BTN-COMPRAR{
-
-    border-radius:10px;
-
-    transition:.3s;
-}
-
-.ICONO-BOTON{
-
-    vertical-align:middle;
-}
-
-.CONTENEDOR-INFO{
-
-    background:rgba(30,41,59,.6);
-
-    border-radius:20px;
-
-    border:1px solid rgba(255,255,255,.1);
-}
-
-.MENSAJE-VACIO{
-
-    color:#94a3b8;
-
-    font-size:1.2rem;
-}
-
-.SUBMENSAJE-VACIO{
-
-    color:#94a3b8;
-}
-
-/* ==========================
-   COMERCIALIZACION
-========================== */
-
-.TITULO-COMERCIAL{
-
-    font-family:'Playfair Display', serif;
-
-}
-
-.SUBTITULO-COMERCIAL{
-
-    letter-spacing:2px;
-
-}
-
-.CONTENEDOR-CARRITO{
-
-    background:rgba(30,41,59,.8);
-
-    backdrop-filter:blur(15px);
-
-    border-radius:20px;
-
-    border:1px solid rgba(255,255,255,.1);
-
-    box-shadow:0 10px 30px rgba(0,0,0,.3);
-
-}
-
-.PANEL-LATERAL{
-
-    min-height:400px;
-
-}
-
-.TITULO-BLOQUE{
-
-    color:white;
-
-    font-family:'Playfair Display', serif;
-
-}
-
-.ICONO-MEDIO{
-
-    vertical-align:middle;
-
-}
-
-.TABLA-CARRITO{
-
-    background:rgba(15,23,42,.5);
-
-    border-radius:15px;
-
-    overflow:hidden;
-
-}
-
-.ENCABEZADO-TABLA{
-
-    text-transform:uppercase;
-
-    opacity:.75;
-
-    font-family:'Playfair Display', serif;
-
-    font-size:.9rem;
-
-}
-
-.FILA-CARRITO{
-
-    border-bottom:1px solid rgba(255,255,255,.15);
-
-}
-
-.IMG-CARRITO{
-
-    width:60px;
-
-    height:60px;
-
-    object-fit:cover;
-
-    border-radius:10px;
-
-    border:1px solid rgba(255,255,255,.2);
-
-}
-
-.NOMBRE-PRODUCTO{
-
-    font-size:.85rem;
-
-    max-width:200px;
-
-    font-weight:700;
-
-    text-transform:uppercase;
-
-}
-
-.TOTAL-CARRITO{
-
-    color:white;
-
-    font-family:'Playfair Display', serif;
-
-}
-
-.TOTAL-PRECIO{
-
-    color:#22c55e;
-
-    font-size:2rem;
-
-    margin-left:.5rem;
-
-}
-
-.DESCRIPCION-LOGISTICA{
-
-    text-align:justify;
-
-    line-height:1.7;
-
-    opacity:.9;
-
-}
-
-.BTN-CONFIRMAR{
-
-    border-radius:12px;
-
-}
-
-/* ==========================
-   LOGIN
-========================== */
-
-.CONTENEDOR-LOGIN{
-
-    max-width:550px;
-
-    background:rgba(30,41,59,.85);
-
-    backdrop-filter:blur(15px);
-
-    border-radius:20px;
-
-    border:1px solid rgba(255,255,255,.1);
-
-    box-shadow:0 15px 40px rgba(0,0,0,.4);
-
-    padding:2.5rem;
-}
-
-.TITULO-LOGIN{
-
-    color:white;
-
-    letter-spacing:2px;
-
-    font-family:'Playfair Display', serif;
-}
-
-.ALERTA-LOGIN{
-
-    border-radius:12px;
-
-    background:rgba(220,53,69,.2);
-
-    border:1px solid rgba(220,53,69,.4);
-
-    color:#f8d7da;
-}
-
-.LISTA-ERRORES{
-
-    padding-left:20px;
-}
-
-.LABEL-LOGIN{
-
-    color:#cbd5e1;
-}
-
-.INPUT-LOGIN{
-
-    background:rgba(15,23,42,.8) !important;
-
-    border:1px solid rgba(148,163,184,.3);
-
-    border-radius:12px;
-
-    padding:12px;
-}
-
-.INPUT-LOGIN:focus{
-
-    background:rgba(15,23,42,.95);
-
-    color:white;
-
-    border-color:#38bdf8;
-
-    box-shadow:none;
-}
-
-.BTN-LOGIN{
-
-    background:linear-gradient(
-        135deg,
-        #0ea5e9,
-        #2563eb
-    );
-
-    color:white;
-
-    border-radius:12px;
-
-    letter-spacing:1px;
-
-    transition:.3s;
-}
-
-.BTN-LOGIN:hover{
-
-    transform:translateY(-2px);
-}
-
-.TEXTO-REGISTRO{
-
-    color:#94a3b8;
-}
-
-.LINK-REGISTRO{
-
-    color:#38bdf8;
-}
-
-/* ==========================
-   MYSTERY BOX
-========================== */
-
-.CONTENEDOR-MYSTERY{
-
-    background:rgba(30,41,59,.8);
-
-    border-radius:20px;
-
-    border:1px solid rgba(255,255,255,.1);
-
-}
-
-.IMG-MYSTERY{
-
-    max-height:300px;
-
-    object-fit:contain;
-
-    border-radius:15px;
-}
-
-.TITULO-MYSTERY{
-
-    font-family:'Playfair Display', serif;
-}
-
-.DESCRIPCION-MYSTERY{
-
-    text-align:justify;
-}
-
-.TITULO-SECCION-MYSTERY{
-
-    font-family:'Playfair Display', serif;
-}
-
-.CARD-TAMANIO{
-
-    width:100%;
-
-    padding:.8rem;
-
-    display:block;
-
-    text-align:center;
-
-    cursor:pointer;
-
-    background:rgba(15,23,42,.5);
-
-    border:1px solid rgba(255,255,255,.2);
-
-    border-radius:15px;
-
-    transition:.3s;
-}
-
-.CARD-TAMANIO:hover{
-
-    transform:translateY(-4px);
-
-    border-color:#38bdf8;
-}
-
-.IMG-TAMANIO{
-
-    max-height:100px;
-}
-
-.BTN-MYSTERY{
-
-    border-radius:12px;
-}
-
-.TABLA-MYSTERY{
-
-    background:rgba(15,23,42,.5);
-
-    border-radius:15px;
-
-    overflow:hidden;
-}
-
-.HEADER-MYSTERY{
-
-    text-transform:uppercase;
-
-    font-size:.85rem;
-
-    opacity:.75;
-}
-
-.FILA-MYSTERY{
-
-    border-bottom:1px solid rgba(255,255,255,.12);
-}
-
-/* ==========================
-   REGISTRO
-========================== */
-
-.CONTENEDOR-REGISTRO{
-
-    max-width:600px;
-
-    background:rgba(30,41,59,.85);
-
-    backdrop-filter:blur(15px);
-
-    border-radius:20px;
-
-    border:1px solid rgba(255,255,255,.1);
-
-    box-shadow:0 15px 40px rgba(0,0,0,.4);
-
-    padding:2.5rem;
-}
-
-.TITULO-REGISTRO{
-
-    color:white;
-
-    letter-spacing:2px;
-
-    font-family:'Playfair Display', serif;
-}
-
-.ALERTA-REGISTRO{
-
-    border-radius:12px;
-
-    background:rgba(220,53,69,.2);
-
-    border:1px solid rgba(220,53,69,.4);
-
-    color:#f8d7da;
-}
-
-.LISTA-ERRORES{
-
-    padding-left:20px;
-}
-
-.LABEL-REGISTRO{
-
-    color:#cbd5e1;
-}
-
-.INPUT-REGISTRO{
-
-    background:rgba(15,23,42,.8) !important;
-
-    border:1px solid rgba(148,163,184,.3);
-
-    border-radius:12px;
-
-    padding:12px;
-}
-
-.INPUT-REGISTRO:focus{
-
-    background:rgba(15,23,42,.95);
-
-    color:white;
-
-    border-color:#38bdf8;
-
-    box-shadow:none;
-}
-
-.INFO-PASSWORD{
-
-    color:#94a3b8;
-}
-
-.BTN-REGISTRO{
-
-    background:linear-gradient(
-        135deg,
-        #0ea5e9,
-        #2563eb
-    );
-
-    color:white;
-
-    border-radius:12px;
-
-    letter-spacing:1px;
-
-    transition:.3s;
-}
-
-.BTN-REGISTRO:hover{
-
-    transform:translateY(-2px);
-}
-
-.TEXTO-LOGIN{
-
-    color:#94a3b8;
-}
-
-.LINK-LOGIN{
-
-    color:#38bdf8;
-}
+/* ==========================================================================
+   PARCHE: JUSTIFICACIÓN GLOBAL DE TEXTOS EN TODO EL SITIO
+   ========================================================================== */
+p, 
+li, 
+.accordion-body, 
+.DESCRIPCION-PRODUCTO, 
+.DESCRIPCION-LOGISTICA, 
+.DESCRIPCION-MYSTERY, 
+.CARD-PRODUCTO p,
+.CUERPO-PRINCIPAL div {
+    text-align: justify !important;
+    text-justify: inter-word; /* Mejora el espaciado entre palabras para que quede prolijo */
+}
+
+/* Excepción necesaria: Mantener los textos del carrusel y login centrados por estética */
+.carousel-caption-custom p, 
+.carousel-caption-custom h3, 
+.carousel-caption-custom h2,
+.CONTENEDOR-LOGIN *, 
+.TEXTO-REGISTRO,
+.TITULO-PRODUCTO {
+    text-align: center !important;
+}   
