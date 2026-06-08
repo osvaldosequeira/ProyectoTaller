@@ -337,3 +337,39 @@ li,
 .TITULO-PRODUCTO {
     text-align: center !important;
 }   
+/* ===== CONTROLES DE CANTIDAD ===== */
+
+.CONTROL-CANTIDAD{
+display:flex;
+justify-content:center;
+align-items:center;
+gap:10px;
+margin-bottom:25px;
+}
+
+.BTN-CANTIDAD{
+width:45px;
+height:45px;
+border:none;
+border-radius:10px;
+font-size:22px;
+font-weight:bold;
+background:rgba(15,23,42,.8);
+color:white;
+transition:.3s;
+}
+
+.BTN-CANTIDAD:hover{
+background:#2563eb;
+}
+
+.INPUT-CANTIDAD{
+width:80px !important;
+text-align:center;
+font-weight:bold;
+margin-bottom:0 !important;
+}
+
+.SELECT-TALLE{
+margin-bottom:25px;
+}

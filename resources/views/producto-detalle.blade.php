@@ -4,7 +4,6 @@
 
 <div class="CUERPO-PRINCIPAL container my-5">
 
-
 <div class="row gap-4 justify-content-center">
 
     <!-- VISTA PRODUCTO -->
@@ -27,6 +26,12 @@
 
         </p>
 
+        <p class="fw-bold text-warning mt-4">
+
+            Stock disponible: {{ $producto->stock }}
+
+        </p>
+
     </div>
 
     <!-- CONFIGURACIÓN -->
@@ -44,9 +49,11 @@
 
             @csrf
 
+            <!-- PASO 1 -->
+
             <p class="SUBTITULO-TAMANIO small fw-bold text-warning text-uppercase mb-3">
 
-                1. Seleccioná el tamaño:
+                1. Seleccioná el tamaño de caja
 
             </p>
 
@@ -62,10 +69,10 @@
                         <input type="radio"
                                name="tamanio"
                                value="Pequeña"
-                               class="form-check-input d-block mx-auto mb-1"
-                               checked>
+                               checked
+                               class="form-check-input d-block mx-auto mb-2">
 
-                        <span class="fw-bold d-block text-warning small">
+                        <span class="fw-bold d-block text-warning">
 
                             PEQUEÑA
 
@@ -91,9 +98,9 @@
                         <input type="radio"
                                name="tamanio"
                                value="Mediana"
-                               class="form-check-input d-block mx-auto mb-1">
+                               class="form-check-input d-block mx-auto mb-2">
 
-                        <span class="fw-bold d-block text-warning small">
+                        <span class="fw-bold d-block text-warning">
 
                             MEDIANA
 
@@ -101,7 +108,7 @@
 
                         <small class="text-success">
 
-                            +$15.000,00
+                            +$15.000
 
                         </small>
 
@@ -119,9 +126,9 @@
                         <input type="radio"
                                name="tamanio"
                                value="Grande"
-                               class="form-check-input d-block mx-auto mb-1">
+                               class="form-check-input d-block mx-auto mb-2">
 
-                        <span class="fw-bold d-block text-warning small">
+                        <span class="fw-bold d-block text-warning">
 
                             GRANDE
 
@@ -129,13 +136,74 @@
 
                         <small class="text-success">
 
-                            +$30.000,00
+                            +$30.000
 
                         </small>
 
                     </label>
 
                 </div>
+
+            </div>
+
+            <!-- PASO 2 -->
+
+            <p class="SUBTITULO-TAMANIO small fw-bold text-warning text-uppercase mb-3">
+
+                2. Seleccioná talle camiseta
+
+            </p>
+
+            <div class="mb-4">
+
+                <select name="talle"
+                        class="form-select">
+
+                    <option value="S">S</option>
+
+                    <option value="M" selected>M</option>
+
+                    <option value="L">L</option>
+
+                    <option value="XL">XL</option>
+
+                </select>
+
+            </div>
+
+            <!-- PASO 3 -->
+
+            <p class="SUBTITULO-TAMANIO small fw-bold text-warning text-uppercase mb-3">
+
+                3. Cantidad
+
+            </p>
+
+            <div class="d-flex justify-content-center align-items-center gap-3 mb-4">
+
+                <button type="button"
+                        onclick="restarCantidad()"
+                        class="btn btn-secondary">
+
+                    -
+
+                </button>
+
+                <input type="number"
+                       id="cantidad"
+                       name="cantidad"
+                       min="1"
+                       value="1"
+                       class="form-control text-center"
+                       style="width:90px;">
+
+                <button type="button"
+                        onclick="sumarCantidad()"
+                        class="btn btn-secondary">
+
+                    +
+
+                </button>
 
             </div>
 
@@ -166,25 +234,13 @@
 
                 <thead>
 
-                <tr class="HEADER-MYSTERY">
+                <tr>
 
-                    <th class="p-3">
+                    <th>Remera Histórica</th>
 
-                        Remera Histórica
+                    <th>Especificación</th>
 
-                    </th>
-
-                    <th class="p-3">
-
-                        Especificación
-
-                    </th>
-
-                    <th class="p-3 text-center">
-
-                        Rareza
-
-                    </th>
+                    <th class="text-center">Rareza</th>
 
                 </tr>
 
@@ -194,23 +250,23 @@
 
                 @foreach($remerasPosibles as $remera)
 
-                <tr class="FILA-MYSTERY">
+                <tr>
 
-                    <td class="p-3 fw-bold">
+                    <td class="fw-bold">
 
                         {{ $remera['equipo'] }}
 
                     </td>
 
-                    <td class="p-3 text-muted fst-italic">
+                    <td>
 
                         {{ $remera['tipo'] }}
 
                     </td>
 
-                    <td class="p-3 text-center">
+                    <td class="text-center">
 
-                        <span class="badge {{ $remera['rareza'] == 'Legendaria' ? 'bg-danger' : ($remera['rareza'] == 'Mítica' ? 'bg-warning text-dark' : 'bg-primary') }} text-uppercase">
+                        <span class="badge {{ $remera['rareza'] == 'Legendaria' ? 'bg-danger' : ($remera['rareza'] == 'Mítica' ? 'bg-warning text-dark' : 'bg-primary') }}">
 
                             {{ $remera['rareza'] }}
 
@@ -232,7 +288,30 @@
 
 </div>
 
-
 </div>
+
+<script>
+
+function sumarCantidad(){
+
+let c=document.getElementById('cantidad');
+
+c.value=parseInt(c.value)+1;
+
+}
+
+function restarCantidad(){
+
+let c=document.getElementById('cantidad');
+
+if(parseInt(c.value)>1){
+
+c.value=parseInt(c.value)-1;
+
+}
+
+}
+
+</script>
 
 @endsection

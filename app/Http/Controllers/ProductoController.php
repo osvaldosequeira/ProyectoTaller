@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Producto; // Mantenemos tu modelo en español
+use App\Models\Producto;
 use Illuminate\Http\Request;
 
 class ProductoController extends Controller
@@ -41,18 +41,21 @@ class ProductoController extends Controller
         $request->validate([
             'nombre'      => 'required|string|max:255',
             'precio'      => 'required|numeric|min:0',
-            'imagen'      => 'required|string', // Nombre del archivo (ej: caja_seleccion.png)
+            'stock'       => 'required|integer|min:0',
+            'imagen'      => 'required|string',
             'descripcion' => 'required|string',
         ]);
 
         Producto::create([
             'nombre'      => $request->nombre,
             'precio'      => $request->precio,
+            'stock'       => $request->stock,
             'imagen'      => $request->imagen,
             'descripcion' => $request->descripcion,
         ]);
 
-        return redirect()->route('admin.productos.index')->with('exito', 'Mystery Box creada con éxito.');
+        return redirect()->route('admin.productos.index')
+            ->with('exito', 'Mystery Box creada con éxito.');
     }
 
     /**
@@ -61,7 +64,11 @@ class ProductoController extends Controller
     public function edit($id)
     {
         $producto = Producto::findOrFail($id);
-        return view('backend.admin.productos.editar', compact('producto'));
+
+        return view(
+            'backend.admin.productos.editar',
+            compact('producto')
+        );
     }
 
     /**
@@ -74,6 +81,7 @@ class ProductoController extends Controller
         $request->validate([
             'nombre'      => 'required|string|max:255',
             'precio'      => 'required|numeric|min:0',
+            'stock'       => 'required|integer|min:0',
             'imagen'      => 'required|string',
             'descripcion' => 'required|string',
         ]);
@@ -81,11 +89,13 @@ class ProductoController extends Controller
         $producto->update([
             'nombre'      => $request->nombre,
             'precio'      => $request->precio,
+            'stock'       => $request->stock,
             'imagen'      => $request->imagen,
             'descripcion' => $request->descripcion,
         ]);
 
-        return redirect()->route('admin.productos.index')->with('exito', 'Mystery Box actualizada con éxito.');
+        return redirect()->route('admin.productos.index')
+            ->with('exito', 'Mystery Box actualizada con éxito.');
     }
 
     /**
@@ -94,9 +104,11 @@ class ProductoController extends Controller
     public function destroy($id)
     {
         $producto = Producto::findOrFail($id);
+
         $producto->delete();
 
-        return redirect()->route('admin.productos.index')->with('exito', 'Mystery Box eliminada correctamente.');
+        return redirect()->route('admin.productos.index')
+            ->with('exito', 'Mystery Box eliminada correctamente.');
     }
 
     /**
@@ -106,9 +118,10 @@ class ProductoController extends Controller
     {
         $producto = Producto::findOrFail($id);
 
-        // Definimos el Pool de Drops según la categoría de la caja
         $remerasPosibles = match (true) {
+
             str_contains(strtolower($producto->nombre), 'champions') => [
+
                 ['equipo' => 'Real Madrid 2002', 'tipo' => 'Titular (Zidane)', 'rareza' => 'Mítica'],
                 ['equipo' => 'Milan 1989', 'tipo' => 'Titular (Van Basten)', 'rareza' => 'Legendaria'],
                 ['equipo' => 'Liverpool 2005', 'tipo' => 'Final Estambul', 'rareza' => 'Épica'],
@@ -125,7 +138,9 @@ class ProductoController extends Controller
                 ['equipo' => 'Benfica 1962', 'tipo' => 'Retro (Eusébio)', 'rareza' => 'Legendaria'],
                 ['equipo' => 'Nottingham Forest 1979', 'tipo' => 'Retro Legend', 'rareza' => 'Legendaria'],
             ],
+
             str_contains(strtolower($producto->nombre), 'mundial') => [
+
                 ['equipo' => 'Argentina 1994', 'tipo' => 'Suplente (Maradona)', 'rareza' => 'Legendaria'],
                 ['equipo' => 'Brasil 1970', 'tipo' => 'Titular (Pelé)', 'rareza' => 'Legendaria'],
                 ['equipo' => 'Alemania 1990', 'tipo' => 'Titular Clásica', 'rareza' => 'Mítica'],
@@ -142,25 +157,20 @@ class ProductoController extends Controller
                 ['equipo' => 'Colombia 1990', 'tipo' => 'Roja (Valderrama)', 'rareza' => 'Mítica'],
                 ['equipo' => 'Croacia 1998', 'tipo' => 'A cuadros Clásica', 'rareza' => 'Épica'],
             ],
-            default => [ // Libertadores o genérica
+
+            default => [
                 ['equipo' => 'River Plate 1996', 'tipo' => 'Titular (Enzo F.)', 'rareza' => 'Legendaria'],
                 ['equipo' => 'Boca Juniors 2000', 'tipo' => 'Titular (Riquelme)', 'rareza' => 'Legendaria'],
                 ['equipo' => 'Independiente 1972', 'tipo' => 'Rey de Copas', 'rareza' => 'Legendaria'],
                 ['equipo' => 'Peñarol 1966', 'tipo' => 'Aurinegra Clásica', 'rareza' => 'Legendaria'],
                 ['equipo' => 'Flamengo 1981', 'tipo' => 'Titular (Zico)', 'rareza' => 'Legendaria'],
                 ['equipo' => 'Santos 1962', 'tipo' => 'Blanca (Pelé)', 'rareza' => 'Legendaria'],
-                ['equipo' => 'Nacional 1988', 'tipo' => 'Titular Clásica', 'rareza' => 'Mítica'],
-                ['equipo' => 'Estudiantes 1968', 'tipo' => 'Pincha Campeón', 'rareza' => 'Legendaria'],
-                ['equipo' => 'Olimpia 1979', 'tipo' => 'Titular (Decano)', 'rareza' => 'Mítica'],
-                ['equipo' => 'Gremio 1983', 'tipo' => 'Tricolor Inmortal', 'rareza' => 'Épica'],
-                ['equipo' => 'San Lorenzo 2014', 'tipo' => 'Titular Campeón', 'rareza' => 'Épica'],
-                ['equipo' => 'Colo-Colo 1991', 'tipo' => 'Blanca Histórica', 'rareza' => 'Mítica'],
-                ['equipo' => 'Atlético Nacional 1989', 'tipo' => 'Titular Clásica', 'rareza' => 'Épica'],
-                ['equipo' => 'Palmeiras 1999', 'tipo' => 'Verdão Campeón', 'rareza' => 'Épica'],
-                ['equipo' => 'Velez 1994', 'tipo' => 'La de la "V" Azulada', 'rareza' => 'Mítica'],
             ],
         };
 
-        return view('producto-detalle', compact('producto', 'remerasPosibles'));
+        return view(
+            'producto-detalle',
+            compact('producto', 'remerasPosibles')
+        );
     }
 }

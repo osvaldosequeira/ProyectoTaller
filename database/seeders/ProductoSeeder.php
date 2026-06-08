@@ -12,28 +12,52 @@ class ProductoSeeder extends Seeder
      */
     public function run(): void
     {
-        // Producto 1: Caja Nacional
+        // Caja Mundial
+
         Producto::create([
-            'nombre' => 'Mystery Box - Camisetas Nacionales',
-            'precio' => 45000.00,
-            'imagen' => 'caja_nacional.png',
-            'descripcion' => 'Una selección única de indumentaria de clubes del fútbol argentino.'
+
+            'nombre' => 'Mystery Box - Edición Mundial',
+
+            'precio' => 55000.00,
+
+            'stock' => 20,
+
+            'imagen' => 'caja_mundial.png',
+
+            'descripcion' => 'Descubrí camisetas históricas de selecciones que hicieron historia en los mundiales.'
+
         ]);
 
-        // Producto 2: Caja Internacional
+        // Caja Champions
+
         Producto::create([
-            'nombre' => 'Mystery Box - Joyas Internacionales',
-            'precio' => 68000.00,
-            'imagen' => 'caja_internacional.png',
-            'descripcion' => 'Prendas históricas de los clubes más grandes de Europa y el mundo.'
+
+            'nombre' => 'Mystery Box - Champions League',
+
+            'precio' => 65000.00,
+
+            'stock' => 15,
+
+            'imagen' => 'caja_champions.png',
+
+            'descripcion' => 'Remeras icónicas de clubes europeos protagonistas de noches inolvidables.'
+
         ]);
 
-        // Producto 3: Caja de la Selección
+        // Caja Libertadores
+
         Producto::create([
-            'nombre' => 'Mystery Box - Selección Argentina',
-            'precio' => 56000.00,
-            'imagen' => 'caja_seleccion.png',
-            'descripcion' => 'Casacas y prendas oficiales que marcaron la historia de nuestra selección.'
+
+            'nombre' => 'Mystery Box - Libertadores',
+
+            'precio' => 50000.00,
+
+            'stock' => 10,
+
+            'imagen' => 'caja_libertadores.png',
+
+            'descripcion' => 'Camisetas legendarias de equipos sudamericanos que marcaron época.'
+
         ]);
     }
 }
