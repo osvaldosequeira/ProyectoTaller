@@ -99,21 +99,30 @@
                         @auth
 
                         <li>
-                            <span class="dropdown-item-text MENU-USUARIO-NOMBRE">
-                                👋 {{ Auth::user()->name }}
-                            </span>
-                        </li>
+    <span class="dropdown-item-text MENU-USUARIO-NOMBRE">
+        👋 {{ Auth::user()->name }}
+    </span>
+</li>
 
-                        <li><hr class="dropdown-divider"></li>
+<li>
+    <a class="dropdown-item MENU-USUARIO-ITEM"
+       href="{{ route('mis-compras') }}">
 
-                        <li>
-                            <form action="{{ route('logout') }}" method="POST">
-                                @csrf
-                                <button type="submit" class="dropdown-item MENU-USUARIO-ITEM BTN-CERRAR-SESION">
-                                    🚪 Cerrar Sesión
-                                </button>
-                            </form>
-                        </li>
+        🛍 Mis Compras
+
+    </a>
+</li>
+
+<li><hr class="dropdown-divider"></li>
+
+<li>
+    <form action="{{ route('logout') }}" method="POST">
+        @csrf
+        <button type="submit" class="dropdown-item MENU-USUARIO-ITEM BTN-CERRAR-SESION">
+            🚪 Cerrar Sesión
+        </button>
+    </form>
+</li>
 
                         @else
 

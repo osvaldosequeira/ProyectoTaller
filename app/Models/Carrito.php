@@ -3,27 +3,20 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class VentaCabecera extends Model
+class Carrito extends Model
 {
-    use HasFactory;
-
-    protected $table = 'venta_cabeceras';
+    protected $table = 'carritos';
 
     protected $fillable = [
-        'user_id',
-        'fecha',
-        'total'
+        'user_id'
     ];
-
-    public $timestamps = true;
 
     public function detalles()
     {
         return $this->hasMany(
-            DetalleVenta::class,
-            'venta_cabecera_id'
+            CarritoDetalle::class,
+            'carrito_id'
         );
     }
 

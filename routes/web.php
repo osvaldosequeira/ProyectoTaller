@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
+use App\Http\Controllers\VentaController;
 use App\Http\Controllers\RolController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\ProductoController;
@@ -133,3 +134,14 @@ Route::middleware(['auth', \App\Http\Middleware\AdminMiddleware::class])->group(
     Route::get('/roles', [RolController::class, 'index'])
         ->name('roles.index');
 });
+
+
+Route::get(
+    '/mis-compras',
+    [VentaController::class, 'misCompras']
+)->name('mis-compras');
+
+Route::get(
+    '/mis-compras/{id}',
+    [VentaController::class, 'detalle']
+)->name('detalle-compra');

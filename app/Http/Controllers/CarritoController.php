@@ -1,205 +1,290 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Carrito;
+use App\Models\CarritoDetalle;
 use App\Models\Producto;
 use App\Models\VentaCabecera;
+use App\Models\DetalleVenta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class CarritoController extends Controller
 {
     public function agregar(Request $request, $id)
-    {
-        $producto = Producto::findOrFail($id);
+{
+    $producto = Producto::findOrFail($id);
 
-        $tamanio = $request->input('tamanio', 'Pequeña');
-        $talle = $request->input('talle', 'M');
-        $cantidad = (int) $request->input('cantidad', 1);
+    $tamanio = $request->input('tamanio', 'Pequeña');
+    $talle = $request->input('talle', 'M');
+    $cantidad = (int) $request->input('cantidad', 1);
 
-        $extras = [
-            'Pequeña' => 0,
-            'Mediana' => 15000,
-            'Grande' => 30000
-        ];
+    $extras = [
+        'Pequeña' => 0,
+        'Mediana' => 15000,
+        'Grande' => 30000
+    ];
 
-        $precioFinal = $producto->precio + ($extras[$tamanio] ?? 0);
+    $precioFinal = $producto->precio + ($extras[$tamanio] ?? 0);
 
-        if($producto->stock < $cantidad){
-            return redirect()->back()
-            ->with('error','No hay suficiente stock disponible');
-        }
+    if ($producto->stock < $cantidad) {
 
-        $carrito = session()->get('carrito', []);
-
-        $itemKey = $id . "_" . $tamanio . "_" . $talle;
-
-        if(isset($carrito[$itemKey])){
-
-            $nuevaCantidad =
-            $carrito[$itemKey]['cantidad'] + $cantidad;
-
-            if($nuevaCantidad > $producto->stock){
-
-                return redirect()->back()
-                ->with('error','Supera el stock disponible');
-
-            }
-
-            $carrito[$itemKey]['cantidad'] += $cantidad;
-
-        }else{
-
-            $carrito[$itemKey] = [
-
-                "producto_id" => $producto->id,
-
-                "nombre" =>
-                $producto->nombre .
-                " | Caja: ".$tamanio .
-                " | Talle: ".$talle,
-
-                "cantidad" => $cantidad,
-
-                "precio" => $precioFinal,
-
-                "imagen" => $producto->imagen,
-
-                "tamanio" => $tamanio,
-
-                "talle" => $talle
-
-            ];
-        }
-
-        session()->put('carrito',$carrito);
-
-        return redirect()
-        ->route('carrito.show')
-        ->with('exito','Producto agregado');
+        return redirect()->back()
+            ->with('error', 'No hay suficiente stock disponible');
     }
+
+    $carrito = Carrito::firstOrCreate([
+        'user_id' => Auth::id()
+    ]);
+
+    $detalle = CarritoDetalle::where(
+        'carrito_id',
+        $carrito->id
+    )
+    ->where(
+        'producto_id',
+        $producto->id
+    )
+    ->where(
+        'tamanio',
+        $tamanio
+    )
+    ->where(
+        'talle',
+        $talle
+    )
+    ->first();
+
+    if ($detalle) {
+
+        $nuevaCantidad =
+            $detalle->cantidad + $cantidad;
+
+        if ($nuevaCantidad > $producto->stock) {
+
+            return redirect()->back()
+                ->with('error', 'Supera el stock disponible');
+        }
+
+        $detalle->cantidad = $nuevaCantidad;
+        $detalle->save();
+
+    } else {
+
+        CarritoDetalle::create([
+
+            'carrito_id' => $carrito->id,
+
+            'producto_id' => $producto->id,
+
+            'cantidad' => $cantidad,
+
+            'precio' => $precioFinal,
+
+            'tamanio' => $tamanio,
+
+            'talle' => $talle
+        ]);
+    }
+
+    return redirect()
+        ->route('carrito.show')
+        ->with('exito', 'Producto agregado');
+}
 
     public function showCarrito()
-    {
-        $carrito = session()->get('carrito', []);
+{
+    $carrito = Carrito::where(
+        'user_id',
+        Auth::id()
+    )
+    ->with('detalles.producto')
+    ->first();
 
-        $total = 0;
+    $items = [];
+    $total = 0;
 
-        foreach($carrito as $item){
+    if($carrito){
+
+        foreach($carrito->detalles as $detalle){
+
+            $itemKey =
+            $detalle->producto_id .
+            "_" .
+            $detalle->tamanio .
+            "_" .
+            $detalle->talle;
+
+            $items[$itemKey] = [
+
+                'producto_id' =>
+                $detalle->producto_id,
+
+                'nombre' =>
+                $detalle->producto->nombre .
+                " | Caja: ".$detalle->tamanio .
+                " | Talle: ".$detalle->talle,
+
+                'cantidad' =>
+                $detalle->cantidad,
+
+                'precio' =>
+                $detalle->precio,
+
+                'imagen' =>
+                $detalle->producto->imagen,
+
+                'tamanio' =>
+                $detalle->tamanio,
+
+                'talle' =>
+                $detalle->talle
+            ];
 
             $total +=
-            $item['precio']
+            $detalle->precio
             *
-            $item['cantidad'];
-
+            $detalle->cantidad;
         }
-
-        return view(
-            'comercializacion',
-            compact(
-                'carrito',
-                'total'
-            )
-        );
     }
+
+    return view(
+        'comercializacion',
+        [
+            'carrito' => $items,
+            'total' => $total
+        ]
+    );
+}
 
     public function eliminar($id)
-    {
-        $carrito = session()->get('carrito', []);
+{
+    $carrito = Carrito::where(
+        'user_id',
+        Auth::id()
+    )->first();
 
-        if(isset($carrito[$id])){
+    if($carrito){
 
-            unset($carrito[$id]);
+        CarritoDetalle::where(
+            'carrito_id',
+            $carrito->id
+        )
+        ->where(
+            'producto_id',
+            $id
+        )
+        ->delete();
+    }
 
-            session()->put(
-                'carrito',
-                $carrito
-            );
-        }
+    return back()
+    ->with(
+        'exito',
+        'Producto eliminado'
+    );
+}
 
+    public function confirmarCompra()
+{
+    $carrito = Carrito::where(
+        'user_id',
+        Auth::id()
+    )
+    ->with('detalles')
+    ->first();
+
+    if(
+        !$carrito ||
+        $carrito->detalles->isEmpty()
+    ){
         return back()
         ->with(
-            'exito',
-            'Producto eliminado'
+            'error',
+            'Carrito vacío'
         );
     }
 
-    public function confirmarCompra()
-    {
-        $carrito =
-        session()->get(
-            'carrito',
-            []
+    $total = 0;
+
+    foreach($carrito->detalles as $item){
+
+        $producto =
+        Producto::find(
+            $item->producto_id
         );
 
-        if(empty($carrito)){
+        if(!$producto){
 
+            continue;
+        }
+
+        if(
+            $producto->stock
+            <
+            $item->cantidad
+        ){
             return back()
             ->with(
                 'error',
-                'Carrito vacío'
+                'Sin stock suficiente para '.$producto->nombre
             );
         }
 
-        $total = 0;
+        $producto->stock -=
+        $item->cantidad;
 
-        foreach($carrito as $item){
+        $producto->save();
 
-            $producto =
-            Producto::find(
-                $item['producto_id']
-            );
+        $total +=
+        $item->precio
+        *
+        $item->cantidad;
+    }
 
-            if(!$producto){
+    $venta = VentaCabecera::create([
 
-                continue;
+        'user_id' =>
+        Auth::id(),
 
-            }
+        'fecha' =>
+        now(),
 
-            if(
-                $producto->stock
-                <
-                $item['cantidad']
-            ){
+        'total' =>
+        $total
+    ]);
 
-                return back()
-                ->with(
-                    'error',
-                    'Sin stock suficiente para '.$producto->nombre
-                );
-            }
+    foreach($carrito->detalles as $item){
 
-            $producto->stock -=
-            $item['cantidad'];
+        DetalleVenta::create([
 
-            $producto->save();
+            'venta_cabecera_id' =>
+            $venta->id,
 
-            $total +=
-            $item['precio']
-            *
-            $item['cantidad'];
-        }
+            'producto_id' =>
+            $item->producto_id,
 
-        VentaCabecera::create([
+            'cantidad' =>
+            $item->cantidad,
 
-            'user_id' =>
-            Auth::id() ?? 1,
+            'precio_unitario' =>
+            $item->precio,
 
-            'fecha' =>
-            now(),
+            'tamanio' =>
+            $item->tamanio,
 
-            'total' =>
-            $total
-
-        ]);
-
-        session()->forget(
-            'carrito'
-        );
-
-        return view('exito', [
-    'compra' => true,
-    'total' => $total
+            'talle' =>
+            $item->talle
         ]);
     }
+
+    CarritoDetalle::where(
+        'carrito_id',
+        $carrito->id
+    )->delete();
+
+    return view('exito', [
+        'compra' => true,
+        'total' => $total
+    ]);
+}
 }
