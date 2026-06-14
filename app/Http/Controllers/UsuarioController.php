@@ -11,9 +11,27 @@ use Illuminate\Support\Facades\Hash;
 
 class UsuarioController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $usuarios = User::all();
+        // Capturamos los datos que viajan desde el formulario GET
+        $buscar = $request->input('buscar');
+        $rol = $request->input('rol');
+
+        // Construimos la consulta usando un Query Builder dinámico
+        $usuarios = User::query()
+            ->when($buscar, function ($query, $buscar) {
+                return $query->where(function($q) use ($buscar) {
+                    $q->where('name', 'like', "%{$buscar}%")
+                      ->orWhere('email', 'like', "%{$buscar}%");
+                });
+            })
+            ->when($rol !== null && $rol !== '', function ($query) use ($rol) {
+                return $query->where('es_admin', $rol);
+            })
+            ->orderBy('name', 'asc')
+            ->get();
+
+        // Retornamos la vista enviando los datos compactados
         return view('backend.admin.usuarios.index', compact('usuarios'));
     }
 
@@ -23,24 +41,25 @@ class UsuarioController extends Controller
     }
 public function dashboard()
 {
+    // Métricas para los números superiores
     $totalUsuarios = User::count();
     $totalProductos = Producto::count();
     $totalAdmins = User::where('es_admin', 1)->count();
-
-    $totalVentasComerciales = VentaCabecera::sum('total');
     $totalVentas = VentaCabecera::count();
+    $totalVentasComerciales = VentaCabecera::sum('total');
 
-    $ultimosUsuarios = User::orderBy('created_at', 'desc')
-        ->take(5)
-        ->get();
+    // Datos detallados para las tablas
+    $ultimosUsuarios = User::orderBy('created_at', 'desc')->take(5)->get();
+    $productosCriticos = Producto::orderBy('stock', 'asc')->take(5)->get(); // Productos con poco stock
+    $ultimasVentas = VentaCabecera::with('usuario')->orderBy('created_at', 'desc')->take(5)->get();
+    
+    // Asumiendo que tenés un modelo Mensaje
+    $ultimosMensajes = \App\Models\Mensaje::orderBy('created_at', 'desc')->take(5)->get();
 
     return view('backend.admin.dashboard', compact(
-        'totalUsuarios',
-        'totalProductos',
-        'totalAdmins',
-        'totalVentasComerciales',
-        'totalVentas',
-        'ultimosUsuarios'
+        'totalUsuarios', 'totalProductos', 'totalAdmins', 
+        'totalVentas', 'totalVentasComerciales', 'ultimosUsuarios',
+        'productosCriticos', 'ultimasVentas', 'ultimosMensajes'
     ));
 }
  public function store(Request $request)

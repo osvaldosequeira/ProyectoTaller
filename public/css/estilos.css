@@ -1,5 +1,5 @@
 /* ==========================================================================
-   1. CONFIGURACIÓN BASE, FUENTES Y RESETEO
+   1. VARIABLES, FUENTES Y RESETEO GLOBAL
    ========================================================================== */
 @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Playfair+Display:wght@700;900&display=swap');
 
@@ -11,8 +11,7 @@
 
 html, body {
     width: 100%;
-    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
-    background-attachment: fixed;
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%) fixed;
     color: #f1f5f9;
     display: flex;
     flex-direction: column;
@@ -23,53 +22,62 @@ html, body {
 
 body { padding-top: 85px; }
 
-/* Tipografías Distinguidas - Color Blanco Puro para Lectura Firme */
+/* ==========================================================================
+   2. TIPOGRAFÍAS Y TEXTOS
+   ========================================================================== */
+.HEADER-PRINCIPAL h1, .TITULO-SECCION, .TITULO-CATALOGO, .TITULO-COMERCIAL, 
+.TITULO-LOGIN, .TITULO-REGISTRO, .TITULO-MYSTERY, .TITULO-SECCION-MYSTERY, 
+.TITULO-BLOQUE, .TOTAL-CARRITO, .ENCABEZADO-TABLA, .HEADER-MYSTERY, .FUENTE-NAVBAR,
+.dropdown-item-text, .MENU-USUARIO-NOMBRE, span.dropdown-item-text {
+    font-family: 'Playfair Display', serif;
+    text-transform: uppercase;
+}
+
+/* Forzado de títulos claros */
 .HEADER-PRINCIPAL h1, .TITULO-SECCION, .TITULO-CATALOGO, .TITULO-COMERCIAL, 
 .TITULO-LOGIN, .TITULO-REGISTRO, .TITULO-MYSTERY, .TITULO-SECCION-MYSTERY, 
 .TITULO-BLOQUE, .TOTAL-CARRITO, .ENCABEZADO-TABLA, .HEADER-MYSTERY, .FUENTE-NAVBAR {
-    font-family: 'Playfair Display', serif;
-    text-transform: uppercase;
     color: #ffffff !important;
 }
 
 .HEADER-PRINCIPAL h1 { font-size: 3.5rem; font-weight: 900; letter-spacing: 5px; }
 .SUBTITULO-CATALOGO, .SUBTITULO-COMERCIAL { letter-spacing: 2px; color: #94a3b8 !important; }
 
+/* Justificación global de lecturas */
+p, li, .accordion-body, .DESCRIPCION-PRODUCTO, .DESCRIPCION-LOGISTICA, 
+.DESCRIPCION-MYSTERY, .CARD-PRODUCTO p, .CUERPO-PRINCIPAL div {
+    text-align: justify !important;
+    text-justify: inter-word;
+}
+
+/* Textos forzados a centrarse */
+.carousel-caption-custom p, .carousel-caption-custom h3, .carousel-caption-custom h2,
+.CONTENEDOR-LOGIN *, .TEXTO-REGISTRO, .TITULO-PRODUCTO, .carousel-caption-custom * {
+    text-align: center !important;
+}
+
+.CUERPO-PRINCIPAL p, .DESCRIPCION-LOGISTICA, .DESCRIPCION-MYSTERY, .CARD-PRODUCTO p, .accordion-body { 
+    color: #e2e8f0 !important; 
+}
+
 /* ==========================================================================
-   2. CONTENEDORES GLASSMORPHISM (Solución de Texto Oscuro)
+   3. COMPONENTES DE INTERFAZ (GLASSMORPHISM, NAVBAR, DROPDOWNS)
    ========================================================================== */
 .FORMULARIO-BOX, .CONTENEDOR-INFO, .CONTENEDOR-TERMINOS, .MENSAJE-BOX, 
 .CONTENEDOR-CARRITO, .CONTENEDOR-LOGIN, .CONTENEDOR-REGISTRO, .CONTENEDOR-MYSTERY {
-    background: rgba(30, 41, 59, 0.85); /* Un poco más opaco para dar contraste */
-    -webkit-backdrop-filter: blur(15px);
-    backdrop-filter: blur(15px);
-    border-radius: 20px;
-    padding: 40px;
-    margin: 0 auto 50px auto;
-    max-width: 850px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
-    font-size: 17px;
-    line-height: 1.7;
-    color: #f1f5f9 !important; /* Fuerza a que todo párrafo sea claro */
+    background: rgba(30, 41, 59, 0.85);
+    backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px);
+    border-radius: 20px; padding: 40px; margin: 0 auto 50px auto; max-width: 850px;
+    border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+    font-size: 17px; line-height: 1.7; color: #f1f5f9 !important;
 }
-
-/* Forzar textos legibles dentro de cualquier contenedor de información */
-.CUERPO-PRINCIPAL p, .DESCRIPCION-LOGISTICA, .DESCRIPCION-MYSTERY, .CARD-PRODUCTO p, .accordion-body { 
-    text-align: justify; 
-    color: #e2e8f0 !important; /* Color gris platino de alta lectura */
-}
-
 .CONTENEDOR-LOGIN { max-width: 550px; }
 .CONTENEDOR-REGISTRO { max-width: 600px; }
 
-/* ==========================================================================
-   3. NAVBAR NATIVA Y DROPDOWN
-   ========================================================================== */
+/* Navbar */
 nav.navbar, .NAVBAR-ESENCIA {
     position: fixed; top: 0; left: 0; width: 100%; z-index: 2000; margin: 0;
-    background: rgba(15, 23, 42, 0.9) !important;
-    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    background: rgba(15, 23, 42, 0.9) !important; backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding: .8rem 1rem;
 }
 .navbar .nav-link, .NAV-LINK-ESENCIA {
@@ -78,298 +86,163 @@ nav.navbar, .NAVBAR-ESENCIA {
 }
 .navbar .nav-link:hover, .NAV-LINK-ESENCIA:hover { color: #38bdf8 !important; }
 .LOGO-NAVBAR, .logo-navbar { height: 50px; object-fit: contain; transition: .3s; }
-.dropdown-item-text, 
-.MENU-USUARIO-NOMBRE,
-span.dropdown-item-text {
-    color: #f59e0b !important; /* Color dorado/ámbar vibrante de alta visibilidad */
-    font-weight: 700 !important;
-    font-family: 'Playfair Display', serif;
-    letter-spacing: 1px;
-    padding: 0.75rem 1rem;
-    display: block;
+
+/* Menú de Usuario y Dropdowns */
+.dropdown-item-text, .MENU-USUARIO-NOMBRE, span.dropdown-item-text {
+    color: #f59e0b !important; font-weight: 700 !important; letter-spacing: 1px; padding: 0.75rem 1rem; display: block;
 }
 .dropdown-menu { background: rgba(30, 41, 59, .98); border: 1px solid rgba(255, 255, 255, .15); min-width: 220px; }
 .MENU-USUARIO-ITEM { color: #f1f5f9 !important; font-weight: 600; }
 .MENU-USUARIO-ITEM:hover { background: rgba(59, 130, 246, .15); color: #38bdf8 !important; }
 
 /* ==========================================================================
-   4. CATÁLOGO, PRECIOS IMPACTANTES Y SELECCIÓN DE PRODUCTO
+   4. SECCIÓN COMERCIAL, CATÁLOGO Y TABLAS
    ========================================================================== */
 .CARD-PRODUCTO {
-    background: rgba(15, 23, 42, 0.6); 
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1); 
-    border-radius: 20px;
-    height: 100%; display: flex; flex-direction: column; justify-content: space-between;
+    background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); 
+    border-radius: 20px; height: 100%; display: flex; flex-direction: column; justify-content: space-between;
     transition: transform .3s ease, border-color .3s ease; box-shadow: 0 10px 25px rgba(0, 0, 0, .3); padding: 25px;
 }
 .CARD-PRODUCTO:hover { transform: translateY(-6px); border-color: #38bdf8; }
 
-/* Manejo de imágenes rotas o desalineadas en el catálogo */
 .IMG-PRODUCTO, .IMG-CONTAINER img, .IMG-MYSTERY { 
-    max-height: 240px; 
-    width: 100%;
-    object-fit: contain; 
-    border-radius: 15px; 
-    margin-bottom: 15px;
-    display: block;
+    max-height: 240px; width: 100%; object-fit: contain; border-radius: 15px; margin-bottom: 15px; display: block;
 }
+.TITULO-PRODUCTO { font-size: 1.2rem; font-weight: 700; margin-bottom: 12px; }
 
-.TITULO-PRODUCTO { font-size: 1.2rem; font-weight: 700; color: #ffffff !important; text-align: center; margin-bottom: 12px; }
-
-/* SOLUCIÓN ERROR DE PRECIOS OCULTOS: Verde Esmeralda Vibrante y Comercial */
 .PRECIO { 
-    font-family: 'Playfair Display', serif;
-    font-size: 2rem; 
-    font-weight: 900; 
-    color: #22c55e !important; 
-    text-align: center !important; /* Fuerza el texto al medio */
-    width: 100% !important;        /* Ocupa todo el ancho disponible */
-    display: block !important;     /* Se comporta como bloque para poder centrarse */
-    margin: 15px 0 !important;
+    font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 900; color: #22c55e !important; 
+    width: 100% !important; display: block !important; margin: 15px 0 !important;
     text-shadow: 0 2px 10px rgba(34, 197, 94, 0.2);
 }
 
-/* SOLUCIÓN SELECCIÓN DE PRODUCTOS: Resaltado de Caja Activa Eficaz */
+/* Selección de Atributos */
 .CARD-TAMANIO {
-    width: 100%; padding: 1.2rem; display: block; text-align: center; cursor: pointer;
-    background: rgba(15, 23, 42, 0.7); border: 2px solid rgba(255, 255, 255, 0.15);
-    border-radius: 15px; transition: all 0.3s ease; color: white; text-decoration: none;
+    width: 100%; padding: 1.2rem; display: block; cursor: pointer; background: rgba(15, 23, 42, 0.7); 
+    border: 2px solid rgba(255, 255, 255, 0.15); border-radius: 15px; transition: all 0.3s ease; color: white; text-decoration: none;
 }
-/* Efecto cuando pasa el mouse por encima */
 .CARD-TAMANIO:hover { border-color: #0ea5e9; transform: translateY(-3px); }
-
-/* Cuando la tarjeta de tamaño está SELECCIONADA (Estilo dinámico brillante) */
 .CARD-TAMANIO.active, input[type="radio"]:checked + .CARD-TAMANIO, .border-primary {
-    border: 3px solid #38bdf8 !important; /* Borde celeste neón grueso */
-    background: rgba(56, 189, 248, 0.15) !important; /* Fondo con sutil brillo celeste */
-    box-shadow: 0 0 20px rgba(56, 189, 248, 0.4); /* Resplandor exterior */
+    border: 3px solid #38bdf8 !important; background: rgba(56, 189, 248, 0.15) !important; box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
 }
 
-/* Tablas Comerciales */
-.TABLA-CARRITO .IMG-CARRITO, 
-.table .IMG-CARRITO,
-td img[src*="caja"] { 
-    width: 80px !important;       /* Tamaño ideal para tarjetas de tabla */
-    height: 80px !important;      /* Mantiene la proporción cuadrada */
-    object-fit: contain !important; /* Evita que la Mystery Box se deforme */
-    border-radius: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    background: rgba(15, 23, 42, 0.4);
-    display: inline-block;
-    vertical-align: middle;
+/* Tablas Administrativas y de Carrito */
+.table { color: #f1f5f9 !important; }
+.table-hover tbody tr:hover { background-color: rgba(255, 255, 255, 0.07) !important; }
+.TABLA-CARRITO .IMG-CARRITO, .table .IMG-CARRITO, td img[src*="caja"] { 
+    width: 80px !important; height: 80px !important; object-fit: contain !important; border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.15); background: rgba(15, 23, 42, 0.4); display: inline-block; vertical-align: middle;
 }
+
 /* ==========================================================================
-   5. COMPONENTES: INPUTS CON PLACEHOLDERS LEGIBLES Y BOTONES
+   5. CONTROLES, FORMULARIOS Y BOTONES
    ========================================================================== */
 input, textarea, select, .INPUT-LOGIN, .INPUT-REGISTRO {
-    width: 100%; padding: 12px; margin-bottom: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 10px;
-    background: rgba(15, 23, 42, 0.8) !important; color: #ffffff !important;
+    width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid rgba(255, 255, 255, 0.2); 
+    border-radius: 10px; background: rgba(15, 23, 42, 0.8) !important; color: #ffffff !important;
     font-family: 'Libre Baskerville', serif; transition: border-color .3s;
 }
 input:focus, textarea:focus, select:focus { border-color: #38bdf8; outline: none; }
+input::placeholder, textarea::placeholder { color: #94a3b8 !important; opacity: 1 !important; }
 
-/* SOLUCIÓN PLACEHOLDERS OSCUROS: Color claro de alta visibilidad para las guías de texto */
-input::placeholder, textarea::placeholder {
-    color: #94a3b8 !important; /* Gris claro nítido */
-    opacity: 1 !important;
-}
-
-/* Botones Unificados */
 .BTN-COMPRAR, .BTN-ENVIAR, .BTN-LOGIN, .BTN-REGISTRO, .BTN-CONFIRMAR, .BTN-MYSTERY {
-    background: linear-gradient(135deg, #0ea5e9 0%, #2563eb 100%);
-    color: white !important; border: none; padding: 15px; font-family: 'Libre Baskerville', serif;
-    font-weight: 700; text-transform: uppercase; border-radius: 12px; width: 100%;
-    text-decoration: none; display: block; text-align: center; transition: .3s; cursor: pointer;
+    background: linear-gradient(135deg, #0ea5e9 0%, #2563eb 100%); color: white !important; border: none; 
+    padding: 15px; font-family: 'Libre Baskerville', serif; font-weight: 700; text-transform: uppercase; 
+    border-radius: 12px; width: 100%; text-decoration: none; display: block; transition: .3s; cursor: pointer;
 }
 .BTN-COMPRAR:hover, .BTN-ENVIAR:hover, .BTN-CONFIRMAR:hover, .BTN-MYSTERY:hover {
     transform: translateY(-2px); filter: brightness(1.1); box-shadow: 0 5px 15px rgba(37, 99, 235, 0.4);
 }
 
+.CONTROL-CANTIDAD { display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 25px; }
+.BTN-CANTIDAD { width: 45px; height: 45px; border: none; border-radius: 10px; font-size: 22px; font-weight: bold; background: rgba(15,23,42,.8); color: white; transition: .3s; }
+.BTN-CANTIDAD:hover { background: #2563eb; }
+.INPUT-CANTIDAD { width: 80px !important; text-align: center; font-weight: bold; margin-bottom: 0 !important; }
+.SELECT-TALLE { margin-bottom: 25px; }
+
+/* Acordeón */
+.accordion-item { background-color: rgba(15, 23, 42, 0.7) !important; margin-bottom: 15px; border-radius: 15px; border: 1px solid rgba(255, 255, 255, 0.1); overflow: hidden; }
+.accordion-button { background-color: rgba(30, 41, 59, 0.9) !important; color: #ffffff !important; font-family: 'Playfair Display', serif; font-weight: 700; text-transform: uppercase; }
+.accordion-button:not(.collapsed) { background-color: rgba(15, 23, 42, 0.95) !important; color: #38bdf8 !important; }
+.accordion-body, .accordion-body p { color: #f1f5f9 !important; background-color: rgba(15, 23, 42, 0.4) !important; font-size: 16px; line-height: 1.8; }
+
+.FOOTER-PRINCIPAL { background: rgba(15, 23, 42, 0.95); padding: 30px 0; border-top: 1px solid rgba(255, 255, 255, 0.1); color: #94a3b8; width: 100% !important; }
+.header-pdf-only { display: none; }
+
 /* ==========================================================================
-   6. COMPONENTES DE TERCEROS (ACORDEÓN DE TÉRMINOS REPARADO)
+   6. COMPONENTES ADICIONALES (CAROUSEL CUSTOM)
    ========================================================================== */
-.accordion-item { 
-    background-color: rgba(15, 23, 42, 0.7) !important; 
-    margin-bottom: 15px; border-radius: 15px; 
-    border: 1px solid rgba(255, 255, 255, 0.1); overflow: hidden; 
+.carousel-container-custom { height: 580px; display: flex !important; flex-direction: column !important; justify-content: flex-start; align-items: center; position: relative; padding: 20px; margin-bottom: 20px; }
+.carousel-poster { height: 350px !important; width: auto !important; object-fit: contain !important; border-radius: 12px; box-shadow: 0px 10px 30px rgba(0,0,0,0.7); transition: transform 0.4s ease; margin: 10px 0 20px 0; }
+.carousel-caption-custom { 
+    position: absolute !important; bottom: 25px !important; left: 50% !important; transform: translateX(-50%) !important; 
+    background: rgba(15, 23, 42, 0.85); border-radius: 15px; padding: 15px 30px; max-width: 650px; width: 90%; 
+    border: 1px solid rgba(255, 255, 255, 0.1); box-shadow: 0 5px 15px rgba(0,0,0,0.4); z-index: 10; 
 }
-.accordion-button { 
-    background-color: rgba(30, 41, 59, 0.9) !important; 
-    color: #ffffff !important; 
-    font-family: 'Playfair Display', serif; font-weight: 700; text-transform: uppercase; 
-}
-.accordion-button:not(.collapsed) { 
-    background-color: rgba(15, 23, 42, 0.95) !important; 
-    color: #38bdf8 !important; 
-}
+.carousel-caption-custom h3, .carousel-caption-custom h2, .carousel-caption-custom p { margin-left: auto !important; margin-right: auto !important; }
+.carousel-caption-custom h3 { font-family: 'Playfair Display', serif; color: #ffffff !important; text-transform: uppercase; font-size: 1.4rem; margin-bottom: 6px; letter-spacing: 2px; }
+.carousel-caption-custom p { color: #cbd5e1 !important; font-size: 0.95rem; margin: 0; }
 
-/* SOLUCIÓN COMPLETA PARA EL TEXTO DEL ACORDEÓN INVISIBLE */
-.accordion-body, .accordion-body p { 
-    color: #f1f5f9 !important; /* Obliga al texto a ser blanco plateado */
-    background-color: rgba(15, 23, 42, 0.4) !important;
-    font-size: 16px;
-    line-height: 1.8;
-}
-
-/* Footer y Tablas Administrativas */
-.table { color: #f1f5f9 !important; }
-.table-hover tbody tr:hover { background-color: rgba(255, 255, 255, 0.07) !important; }
-.FOOTER-PRINCIPAL {
-    background: rgba(15, 23, 42, 0.95);
-    padding: 30px 0;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    color: #94a3b8;
-    width: 100% !important;
-}
-
-/* Responsive */
+/* ==========================================================================
+   7. SECCIÓN MEDIA QUERIES (RESPONSIVE MÓVIL Y GRID ELEVADO)
+   ========================================================================== */
 @media (max-width: 768px) {
     body { padding-top: 65px; }
     .HEADER-PRINCIPAL h1 { font-size: 1.8rem; letter-spacing: 2px; }
     .FORMULARIO-BOX, .CONTENEDOR-INFO, .CONTENEDOR-TERMINOS { padding: 25px; margin: 15px; }
     .navbar-collapse { background-color: rgba(30, 41, 59, 0.98); backdrop-filter: blur(15px); margin-top: 15px; padding: 20px; border-radius: 20px; }
+    
+    /* Configuración Responsiva del Dashboard */
+    .TITULO-DASHBOARD { font-size: 2rem !important; letter-spacing: 1px !important; text-align: left !important; }
+    .BOTON-DASHBOARD-PRINT { font-size: 0.85rem !important; padding: 12px !important; }
+    
+    /* Carousel Móvil */
+    .carousel-container-custom { height: 480px; }
+    .carousel-poster { height: 250px !important; }
+    .carousel-caption-custom { width: 95%; padding: 10px 15px; bottom: 15px !important; }
+    .carousel-caption-custom h3 { font-size: 1.1rem; }
 }
+
+@media (min-width: 1200px) {
+    .col-xl-2\.4 { flex: 0 0 20%; max-width: 20%; }
+}
+
 /* ==========================================================================
-   PARCHE DEFINITIVO: CENTRADO MILIMÉTRICO DEL CAPTION
+   8. REGLAS MAESTRAS PARA EXPORTACIÓN EN PDF (PRINT ENGINE ALTA FIDELIDAD)
    ========================================================================== */
-.carousel-container-custom { 
-    height: 580px; 
-    display: flex !important; 
-    flex-direction: column !important; 
-    justify-content: flex-start; /* Alinea los elementos al inicio del contenedor */
-    align-items: center; 
-    position: relative;
-    padding: 20px;
-    margin-bottom: 20px;
-}
-
-.carousel-poster { 
-    height: 350px !important; 
-    width: auto !important; 
-    object-fit: contain !important; 
-    border-radius: 12px; 
-    box-shadow: 0px 10px 30px rgba(0,0,0,0.7); 
-    transition: transform 0.4s ease;
-    margin-top: 10px;
-    margin-bottom: 20px;
-}
-
-/* Rediseño con posicionamiento absoluto para forzar el centro real */
-.carousel-caption-custom { 
-    position: absolute !important;
-    bottom: 25px !important; /* Distancia fija desde el piso del carrusel */
-    left: 50% !important;   /* Lo mueve al centro de la pantalla */
-    transform: translateX(-50%) !important; /* Truco de CSS para centrarlo perfecto según su propio ancho */
-    background: rgba(15, 23, 42, 0.85); 
-    border-radius: 15px; 
-    padding: 15px 30px;
-    max-width: 650px; 
-    width: 90%;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 5px 15px rgba(0,0,0,0.4);
-    z-index: 10;
-}
-
-/* Asegurar el centrado del texto interno */
-.carousel-caption-custom h3, 
-.carousel-caption-custom h2,
-.carousel-caption-custom p {
-    text-align: center !important;
-    margin-left: auto !important;
-    margin-right: auto !important;
-}
-
-.carousel-caption-custom h3 {
-    font-family: 'Playfair Display', serif;
-    color: #ffffff !important;
-    text-transform: uppercase;
-    font-size: 1.4rem;
-    margin-bottom: 6px;
-    letter-spacing: 2px;
-}
-
-.carousel-caption-custom p {
-    color: #cbd5e1 !important; 
-    font-size: 0.95rem;
-    margin: 0;
-}
-
-/* Ajuste responsive para celulares */
-@media (max-width: 768px) {
-    .carousel-container-custom {
-        height: 480px;
+@media print {
+    * { background: transparent !important; color: #000000 !important; text-shadow: none !important; box-shadow: none !important; filter: none !important; }
+    @page { size: A4 portrait; margin: 20mm 15mm 25mm 15mm; }
+    body { background: #ffffff !important; color: #000000 !important; padding-top: 0 !important; font-family: 'Segoe UI', Arial, sans-serif !important; }
+    
+    .seccion-no-imprimible, .btn, nav, footer, .NAVBAR-ESENCIA, .FOOTER-PRINCIPAL, .BTN-CANTIDAD { display: none !important; }
+    
+    /* Cabecera del Documento Imprimible */
+    .header-pdf-only { display: block !important; text-align: center !important; margin-bottom: 35px !important; border-bottom: 3px double #000000 !important; padding-bottom: 15px !important; }
+    .header-pdf-only h1 { font-family: 'Playfair Display', serif !important; font-size: 24pt !important; text-transform: uppercase !important; margin-top: 10px !important; }
+    
+    /* Tablas Limpias en Blanco y Negro */
+    .wrapper-tabla, .bloque-reportable { background: #ffffff !important; border: none !important; padding: 0 !important; margin-bottom: 25px !important; }
+    table, .table { border-collapse: collapse !important; width: 100% !important; margin-top: 10px !important; border: 1px solid #000000 !important; }
+    .table th, .table td { border: 1px solid #000000 !important; padding: 10px !important; font-size: 10pt !important; text-align: left !important; }
+    .table thead th { background-color: #f3f4f6 !important; font-weight: bold !important; }
+    
+    /* Forzado Lineal para Badges e Indicadores */
+    .text-white, .text-info, .text-success, .text-warning, .text-danger, .fw-bold { color: #000000 !important; font-weight: 700 !important; }
+    .opacity-50, .opacity-75 { opacity: 1 !important; color: #000000 !important; }
+    .badge { background: transparent !important; color: #000000 !important; border: 1px solid #000000 !important; font-weight: bold !important; padding: 3px 6px !important; border-radius: 4px !important; }
+    
+    p, li, td { text-align: left !important; }
+    h5, .cabecera-bloque h5 { font-family: 'Playfair Display', serif !important; color: #000000 !important; font-size: 14pt !important; margin-bottom: 12px !important; text-transform: uppercase !important; }
+    
+    /* Aislamiento de capas PDF */
+    .modo-aislado-pdf .bloque-reportable { display: none !important; }
+    .modo-aislado-pdf .bloque-activo-pdf { display: block !important; width: 100% !important; max-width: 100% !important; flex: 0 0 100% !important; }
+    
+    /* Footer de Auditoría Estricto */
+    body::after {
+        content: "Documento de Auditoría Interna Confidencial - Esencia Retro Corrientes | Generado el " attr(data-fecha) " | Licenciatura en Sistemas de Información UNNE";
+        display: block !important; position: fixed !important; bottom: 0 !important; left: 0 !important; width: 100% !important; text-align: center !important;
+        font-family: Arial, sans-serif !important; font-size: 8pt !important; color: #4b5563 !important; border-top: 1px solid #000000 !important; padding: 10px 20px !important; background: #ffffff !important;
     }
-    .carousel-poster {
-        height: 250px !important;
-    }
-    .carousel-caption-custom {
-        width: 95%;
-        padding: 10px 15px;
-        bottom: 15px !important;
-    }
-    .carousel-caption-custom h3 {
-        font-size: 1.1rem;
-    }
-}
-/* ==========================================================================
-   PARCHE: JUSTIFICACIÓN GLOBAL DE TEXTOS EN TODO EL SITIO
-   ========================================================================== */
-p, 
-li, 
-.accordion-body, 
-.DESCRIPCION-PRODUCTO, 
-.DESCRIPCION-LOGISTICA, 
-.DESCRIPCION-MYSTERY, 
-.CARD-PRODUCTO p,
-.CUERPO-PRINCIPAL div {
-    text-align: justify !important;
-    text-justify: inter-word; /* Mejora el espaciado entre palabras para que quede prolijo */
-}
-
-/* Excepción necesaria: Mantener los textos del carrusel y login centrados por estética */
-.carousel-caption-custom p, 
-.carousel-caption-custom h3, 
-.carousel-caption-custom h2,
-.CONTENEDOR-LOGIN *, 
-.TEXTO-REGISTRO,
-.TITULO-PRODUCTO {
-    text-align: center !important;
-}   
-/* ===== CONTROLES DE CANTIDAD ===== */
-
-.CONTROL-CANTIDAD{
-display:flex;
-justify-content:center;
-align-items:center;
-gap:10px;
-margin-bottom:25px;
-}
-
-.BTN-CANTIDAD{
-width:45px;
-height:45px;
-border:none;
-border-radius:10px;
-font-size:22px;
-font-weight:bold;
-background:rgba(15,23,42,.8);
-color:white;
-transition:.3s;
-}
-
-.BTN-CANTIDAD:hover{
-background:#2563eb;
-}
-
-.INPUT-CANTIDAD{
-width:80px !important;
-text-align:center;
-font-weight:bold;
-margin-bottom:0 !important;
-}
-
-.SELECT-TALLE{
-margin-bottom:25px;
 }

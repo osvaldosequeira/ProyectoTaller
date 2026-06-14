@@ -19,12 +19,28 @@ class ProductoController extends Controller
     /**
      * Muestra el panel de administración de productos.
      */
-    public function adminIndex()
-    {
-        $productos = Producto::all();
-        return view('backend.admin.productos.index', compact('productos'));
-    }
+   public function adminIndex(Request $request)
+{
+    $buscar = $request->input('buscar');
+    $stock = $request->input('stock');
 
+    $productos = \App\Models\Producto::query()
+        ->when($buscar, function ($query, $buscar) {
+            return $query->where('nombre', 'like', "%{$buscar}%");
+        })
+        ->when($stock, function ($query, $stock) {
+            if ($stock === 'bajo') {
+                return $query->where('stock', '<=', 5)->where('stock', '>', 0);
+            }
+            if ($stock === 'sin') {
+                return $query->where('stock', 0);
+            }
+        })
+        ->orderBy('nombre', 'asc')
+        ->get();
+
+    return view('backend.admin.productos.index', compact('productos'));
+}
     /**
      * Muestra el formulario para dar de alta una nueva Mystery Box.
      */

@@ -11,7 +11,34 @@
             ✉️ {{ session('exito') }}
         </div>
     @endif
-
+<!-- SECCIÓN DE BUSCADOR Y FILTROS -->
+    <div class="p-4 mb-4" style="background: rgba(30, 41, 59, 0.5); border-radius: 15px; border: 1px solid rgba(255,255,255,0.05);">
+        <form action="{{ route('admin.mensajes.index') }}" method="GET" class="row g-3 align-items-end">
+            <div class="col-md-5">
+                <label for="buscar" class="small text-uppercase opacity-50 fw-bold mb-2 d-block">Buscar en Consultas</label>
+                <input type="text" name="buscar" id="buscar" class="form-control bg-dark text-white border-secondary" 
+                       placeholder="Nombre, correo o palabras clave..." value="{{ request('buscar') }}">
+            </div>
+            <div class="col-md-4">
+                <label for="tipo" class="small text-uppercase opacity-50 fw-bold mb-2 d-block">Tipo de Remitente</label>
+               <select name="tipo" id="tipo" class="form-select bg-dark text-white border-secondary">
+    <option value="">Todos los mensajes</option>
+    <option value="registrado" {{ request('tipo') === 'registrado' ? 'selected' : '' }}>
+        Solo Registrados
+    </option>
+    <option value="no registrado" {{ request('tipo') === 'no registrado' ? 'selected' : '' }}>
+        Solo No Registrados
+    </option>
+</select>
+            </div>
+            <div class="col-md-3 d-flex gap-2">
+                <button type="submit" class="btn btn-warning fw-bold w-100 text-uppercase">Filtrar</button>
+                @if(request()->has('buscar') || request()->has('tipo'))
+                    <a href="{{ route('admin.mensajes.index') }}" class="btn btn-outline-secondary w-50">Limpiar</a>
+                @endif
+            </div>
+        </form>
+    </div>
     <div class="table-responsive p-4" style="background: rgba(30, 41, 59, 0.8); border-radius: 20px; border: 1px solid rgba(255,255,255,0.1);">
         <table class="table table-dark align-middle">
             <thead>

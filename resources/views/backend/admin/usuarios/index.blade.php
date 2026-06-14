@@ -19,8 +19,34 @@
         </div>
     @endif
 
+    <!-- SECCIÓN DE BUSCADOR Y FILTROS INTERACTIVOS -->
+    <div class="p-4 mb-4" style="background: rgba(30, 41, 59, 0.5); border-radius: 15px; border: 1px solid rgba(255,255,255,0.05);">
+        <form action="{{ route('usuarios.index') }}" method="GET" class="row g-3 align-items-end">
+            <div class="col-md-5">
+                <label for="buscar" class="small text-uppercase opacity-50 fw-bold mb-2 d-block">Buscar Usuario</label>
+                <input type="text" name="buscar" id="buscar" class="form-control bg-dark text-white border-secondary" 
+                       placeholder="Nombre o correo electrónico..." value="{{ request('buscar') }}">
+            </div>
+            <div class="col-md-4">
+                <label for="rol" class="small text-uppercase opacity-50 fw-bold mb-2 d-block">Filtrar por Rol</label>
+                <select name="rol" id="rol" class="form-select bg-dark text-white border-secondary">
+                    <option value="">Todos los roles</option>
+                    <option value="1" {{ request('rol') === '1' ? 'selected' : '' }}>Administradores</option>
+                    <option value="0" {{ request('rol') === '0' ? 'selected' : '' }}>Clientes</option>
+                </select>
+            </div>
+            <div class="col-md-3 d-flex gap-2">
+                <button type="submit" class="btn btn-warning fw-bold w-100 text-uppercase">Filtrar</button>
+                @if(request()->has('buscar') || request()->has('rol'))
+                    <a href="{{ route('usuarios.index') }}" class="btn btn-outline-secondary w-50 text-white border-secondary">Limpiar</a>
+                @endif
+            </div>
+        </form>
+    </div>
+
+    <!-- TABLA DE RESULTADOS -->
     <div class="table-responsive p-4" style="background: rgba(30, 41, 59, 0.8); border-radius: 20px; border: 1px solid rgba(255,255,255,0.1);">
-        <table class="table table-dark align-middle">
+        <table class="table table-dark align-middle m-0">
             <thead>
                 <tr class="text-uppercase small opacity-50" style="font-family: 'Playfair Display', serif;">
                     <th>Nombre</th>
@@ -30,7 +56,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach($usuarios as $user)
+                @forelse($usuarios as $user)
                 <tr class="FILA-MYSTERY">
                     <td class="fw-bold text-white">{{ $user->name }}</td>
                     <td>{{ $user->email }}</td>
@@ -54,7 +80,13 @@
                         </div>
                     </td>
                 </tr>
-                @endforeach
+                @empty
+                <tr>
+                    <td colspan="4" class="text-center py-4 opacity-50 fw-bold">
+                        No se encontraron usuarios que coincidan con los criterios de búsqueda.
+                    </td>
+                </tr>
+                @endforelse
             </tbody>
         </table>
     </div>

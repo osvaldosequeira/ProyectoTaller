@@ -8,14 +8,32 @@ use Illuminate\Support\Facades\Auth; // Necesario para detectar si está loguead
 
 class MensajeController extends Controller
 {
-    /**
-     * Listar todos los mensajes en el Panel de Administración (Backend)
-     */
-    public function index()
-    {
-        $mensajes = Mensaje::with('usuario')->orderBy('created_at', 'desc')->get();
-        return view('backend.admin.mensajes.index', compact('mensajes'));
-    }
+    public function index(Request $request)
+{
+    $buscar = $request->input('buscar');
+    $tipo = $request->input('tipo');
+
+    $mensajes = Mensaje::with('usuario')
+        ->when($buscar, function ($query, $buscar) {
+            return $query->where(function($q) use ($buscar) {
+                $q->where('nombre', 'like', "%{$buscar}%")
+                  ->orWhere('email', 'like', "%{$buscar}%")
+                  ->orWhere('mensaje', 'like', "%{$buscar}%");
+            });
+        })
+        ->when($tipo, function ($query, $tipo) {
+            if ($tipo === 'registrado') {
+                return $query->whereNotNull('user_id'); // Filtra donde el usuario existe
+            }
+            if ($tipo === 'no registrado') {
+                return $query->whereNull('user_id'); // Filtra donde el usuario es null
+            }
+        })
+        ->orderBy('created_at', 'desc')
+        ->get();
+
+    return view('backend.admin.mensajes.index', compact('mensajes'));
+}
 
     /**
      * Procesar el formulario de contacto público y guardarlo en MariaDB (Frontend)
