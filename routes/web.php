@@ -133,6 +133,17 @@ Route::middleware(['auth', \App\Http\Middleware\AdminMiddleware::class])->group(
     // Roles
     Route::get('/roles', [RolController::class, 'index'])
         ->name('roles.index');
+
+    // Ventas
+Route::get(
+    '/admin/ventas',
+    [VentaController::class, 'adminVentas']
+)->name('admin.ventas.index');
+
+Route::get(
+    '/admin/ventas/{id}',
+    [VentaController::class, 'adminDetalle']
+)->name('admin.ventas.detalle');    
 });
 
 

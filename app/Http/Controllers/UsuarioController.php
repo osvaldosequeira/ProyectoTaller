@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\VentaCabecera;
 use App\Models\User;
 use App\Models\Producto; // Tu modelo real en español
 use Illuminate\Http\Request;
@@ -21,19 +22,27 @@ class UsuarioController extends Controller
         return view('backend.admin.usuarios.crear');
     }
 public function dashboard()
-    {
-        $totalUsuarios = User::count();
-        $totalProductos = Producto::count(); // Cuenta tus Mystery Boxes
-        $totalAdmins = User::where('es_admin', 1)->count();
-        $totalVentasComerciales = 345000.00; // Podés dejarlo estático por ahora para el taller
+{
+    $totalUsuarios = User::count();
+    $totalProductos = Producto::count();
+    $totalAdmins = User::where('es_admin', 1)->count();
 
-        $ultimosUsuarios = User::orderBy('created_at', 'desc')->take(5)->get();
+    $totalVentasComerciales = VentaCabecera::sum('total');
+    $totalVentas = VentaCabecera::count();
 
-        return view('backend.admin.dashboard', compact(
-            'totalUsuarios', 'totalProductos', 'totalAdmins', 
-            'totalVentasComerciales', 'ultimosUsuarios'
-        ));
-    }
+    $ultimosUsuarios = User::orderBy('created_at', 'desc')
+        ->take(5)
+        ->get();
+
+    return view('backend.admin.dashboard', compact(
+        'totalUsuarios',
+        'totalProductos',
+        'totalAdmins',
+        'totalVentasComerciales',
+        'totalVentas',
+        'ultimosUsuarios'
+    ));
+}
  public function store(Request $request)
     {
         $request->validate([

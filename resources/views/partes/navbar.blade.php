@@ -62,15 +62,22 @@
                                 </a>
                             </li>
                             <li>
-                                <a class="dropdown-item MENU-USUARIO-ITEM" href="{{ route('usuarios.index') }}">
-                                    👥 Gestión de Usuarios
-                                </a>
-                            </li>
-                            <li>
-                                <a class="dropdown-item MENU-USUARIO-ITEM" href="{{ route('admin.mensajes.index') }}">
-                                    ✉️ Gestión de Mensajes
-                                </a>
-                            </li>
+    <a class="dropdown-item MENU-USUARIO-ITEM" href="{{ route('usuarios.index') }}">
+        👥 Gestión de Usuarios
+    </a>
+</li>
+
+<li>
+    <a class="dropdown-item MENU-USUARIO-ITEM" href="{{ route('admin.ventas.index') }}">
+        💰 Gestión de Ventas
+    </a>
+</li>
+
+<li>
+    <a class="dropdown-item MENU-USUARIO-ITEM" href="{{ route('admin.mensajes.index') }}">
+        ✉️ Gestión de Mensajes
+    </a>
+</li>
                         </ul>
                     </li>
                     @endif
