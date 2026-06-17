@@ -190,13 +190,13 @@
                 </button>
 
                 <input type="number"
-                       id="cantidad"
-                       name="cantidad"
-                       min="1"
-                       value="1"
-                       class="form-control text-center"
-                       style="width:90px;">
-
+       id="cantidad"
+       name="cantidad"
+       min="1"
+       max="{{ $producto->stock }}"
+       value="1"
+       class="form-control text-center"
+       style="width:90px;">
                 <button type="button"
                         onclick="sumarCantidad()"
                         class="btn btn-secondary">
@@ -290,34 +290,74 @@
 
 </div>
 
+
 <script>
 
 // Incrementa en 1 la cantidad seleccionada
 function sumarCantidad(){
 
-    // Obtiene el campo input con id "cantidad"
     let c = document.getElementById('cantidad');
 
-    // Convierte el valor actual a entero y le suma 1
-    c.value = parseInt(c.value) + 1;
+    let stock = {{ $producto->stock }};
+
+    if(parseInt(c.value) < stock){
+
+        c.value = parseInt(c.value) + 1;
+
+    }else{
+
+        alert(
+            'No hay más stock disponible. Stock actual: ' + stock
+        );
+
+    }
 
 }
 
 // Disminuye en 1 la cantidad seleccionada
 function restarCantidad(){
 
-    // Obtiene el campo input con id "cantidad"
     let c = document.getElementById('cantidad');
 
-    // Evita que la cantidad sea menor a 1
     if(parseInt(c.value) > 1){
 
-        // Convierte el valor actual a entero y le resta 1
         c.value = parseInt(c.value) - 1;
 
     }
 
 }
+
+// Evita que escriban manualmente más stock del disponible
+document.addEventListener('DOMContentLoaded', function(){
+
+    let input = document.getElementById('cantidad');
+
+    let stock = {{ $producto->stock }};
+
+    input.addEventListener('input', function(){
+
+        if(parseInt(this.value) > stock){
+
+            this.value = stock;
+
+            alert(
+                'Solo quedan ' +
+                stock +
+                ' unidades disponibles.'
+            );
+
+        }
+
+        if(parseInt(this.value) < 1){
+
+            this.value = 1;
+
+        }
+
+    });
+
+});
+
 
 </script>
 

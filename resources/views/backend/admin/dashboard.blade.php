@@ -28,7 +28,7 @@
             <div class="p-4 h-100" style="background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: 15px;">
                 <span class="small text-success fw-bold d-block mb-1 text-uppercase">Ingresos Totales</span>
                 <h3 class="fw-bold m-0 text-success">${{ number_format($totalVentasComerciales, 2, ',', '.') }}</h3>
-                <small class="text-muted fs-7">{{ $totalVentas }} órdenes procesadas</small>
+                <small class="text-white fs-">{{ $totalVentas }} órdenes procesadas</small>
             </div>
         </div>
 
@@ -36,7 +36,7 @@
             <div class="p-4 h-100" style="background: rgba(59, 130, 246, 0.15); border: 1px solid rgba(59, 130, 246, 0.3); border-radius: 15px;">
                 <span class="small text-info fw-bold d-block mb-1 text-uppercase">Clientes Registrados</span>
                 <h3 class="fw-bold m-0 text-info">{{ $totalUsuarios }}</h3>
-                <small class="text-muted fs-7">Cuentas en la plataforma</small>
+                <small class="text-white fs-">Cuentas en la plataforma</small>
             </div>
         </div>
 
@@ -44,7 +44,7 @@
             <div class="p-4 h-100" style="background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.3); border-radius: 15px;">
                 <span class="small text-warning fw-bold d-block mb-1 text-uppercase">Mystery Boxes</span>
                 <h3 class="fw-bold m-0 text-warning">{{ $totalProductos }}</h3>
-                <small class="text-muted fs-7">Productos en catálogo</small>
+                <small class="text-white fs-">Productos en catálogo</small>
             </div>
         </div>
 
@@ -52,7 +52,7 @@
             <div class="p-4 h-100" style="background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 15px;">
                 <span class="small text-danger fw-bold d-block mb-1 text-uppercase">Administradores</span>
                 <h3 class="fw-bold m-0 text-danger">{{ $totalAdmins }}</h3>
-                <small class="text-muted fs-7">Usuarios con permisos</small>
+                <small class="text-white fs-">Usuarios con permisos</small>
             </div>
         </div>
 
@@ -60,7 +60,7 @@
             <div class="p-4 h-100" style="background: rgba(168, 85, 247, 0.15); border: 1px solid rgba(168, 85, 247, 0.3); border-radius: 15px;">
                 <span class="small fw-bold d-block mb-1 text-uppercase" style="color: #a855f7;">Mensajes Soporte</span>
                 <h3 class="fw-bold m-0" style="color: #a855f7;">{{ count($ultimosMensajes) }}</h3>
-                <small class="text-muted fs-7">Consultas sin responder</small>
+                <small class="text-white fs-">Consultas sin responder</small>
             </div>
         </div>
     </div>

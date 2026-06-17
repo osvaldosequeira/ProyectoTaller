@@ -16,25 +16,58 @@ use App\Models\User;
 
 class VentaController extends Controller
 {
-    // Muestra el historial de compras del usuario autenticado.
-    public function misCompras()
-    {
-        // Obtiene todas las ventas pertenecientes al usuario actual.
-        $ventas = VentaCabecera::where(
-            'user_id',
-            Auth::id()
-        )
-        // Ordena las ventas desde la más reciente a la más antigua.
+   // Muestra el historial de compras del usuario autenticado.
+public function misCompras(Request $request)
+{
+    // Consulta base
+    $query = VentaCabecera::where(
+        'user_id',
+        Auth::id()
+    );
+
+    // Filtrar por ID de compra
+    if ($request->filled('venta_id')) {
+
+        $query->where(
+            'id',
+            $request->venta_id
+        );
+
+    }
+
+    // Filtrar desde fecha
+    if ($request->filled('desde')) {
+
+        $query->whereDate(
+            'fecha',
+            '>=',
+            $request->desde
+        );
+
+    }
+
+    // Filtrar hasta fecha
+    if ($request->filled('hasta')) {
+
+        $query->whereDate(
+            'fecha',
+            '<=',
+            $request->hasta
+        );
+
+    }
+
+    // Obtener ventas ordenadas
+    $ventas = $query
         ->orderBy('fecha', 'desc')
         ->get();
 
-        // Envía las ventas a la vista correspondiente.
-        return view(
-            'mis-compras',
-            compact('ventas')
-        );
-    }
-
+    // Enviar a la vista
+    return view(
+        'mis-compras',
+        compact('ventas')
+    );
+}
     // Muestra el detalle de una compra específica del usuario.
     public function detalle($id)
     {

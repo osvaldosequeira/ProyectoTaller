@@ -276,17 +276,13 @@ class CarritoController extends Controller
         }
 
         // Verifica que exista stock suficiente.
-        if(
-            $producto->stock
-            <
-            $item->cantidad
-        ){
-            return back()
-            ->with(
-                'error',
-                'Sin stock suficiente para '.$producto->nombre
-            );
-        }
+      if(
+    $producto->stock
+    <
+    $item->cantidad
+){
+    dd('ENTRO AL IF DE STOCK');
+}
 
         // Descuenta del stock la cantidad comprada.
         $producto->stock -=

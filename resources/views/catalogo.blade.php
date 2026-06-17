@@ -7,9 +7,9 @@
     <div class="HEADER-PRINCIPAL mb-5">
 
         <!-- Título principal del catálogo -->
-        <h1 class="TITULO-CATALOGO mb-2">
-            Catálogo de Productos
-        </h1>
+        <h1 class="TITULO-CATALOGO mb-2 text-center w-100">
+    Catálogo de Productos
+</h1>
 
         <!-- Subtítulo descriptivo -->
         <p class="SUBTITULO-CATALOGO text-center text-uppercase small opacity-75">
@@ -54,23 +54,58 @@
                             </p>
                         </div>
 
-                        <!-- Precio y botón de acción -->
-                        <div class="w-100 text-center">
+                       <!-- Precio y acción -->
+<div class="w-100 text-center">
 
-                            <!-- Precio formateado -->
-                            <div class="PRECIO mb-3 mx-auto w-100 text-center">
-                                ${{ number_format($producto->precio, 2, ',', '.') }}
-                            </div>
+    @if($producto->stock > 0)
 
-                            <!-- Botón para configurar la caja o ver detalles -->
-                            <a href="{{ route('admin.productos.show', $producto->id) }}"
-                               class="BTN-COMPRAR fw-bold text-uppercase">
+        <!-- Precio -->
+        <div class="PRECIO mb-3 mx-auto w-100 text-center">
 
-                                <span class="ICONO-BOTON me-2">⚙️</span>
-                                Configurar Caja
-                            </a>
+            ${{ number_format($producto->precio, 2, ',', '.') }}
 
-                        </div>
+        </div>
+
+        <!-- Botón disponible -->
+        <a href="{{ route('admin.productos.show', $producto->id) }}"
+           class="BTN-COMPRAR fw-bold text-uppercase">
+
+            <span class="ICONO-BOTON me-2">⚙️</span>
+
+            Configurar Caja
+
+        </a>
+
+    @else
+
+        <!-- Precio atenuado -->
+        <div class="PRECIO mb-2 mx-auto w-100 text-center opacity-50">
+
+            ${{ number_format($producto->precio, 2, ',', '.') }}
+
+        </div>
+
+        <!-- Mensaje de stock agotado -->
+        <div class="alert alert-danger text-center fw-bold py-2 mb-3">
+
+            ⚠️ No hay stock disponible.
+            <br>
+            Vuelva pronto.
+
+        </div>
+
+        <!-- Botón deshabilitado -->
+        <button
+            class="btn btn-secondary w-100"
+            disabled>
+
+            No Disponible
+
+        </button>
+
+    @endif
+
+</div>
                     </div>
                 </div>
             </div>
