@@ -4,95 +4,106 @@
 
 <div class="container my-5">
 
+    <!-- Título principal con el número de la compra -->
+    <h1 class="text-center mb-4">
+        Detalle de Compra #{{ $venta->id }}
+    </h1>
 
-<h1 class="text-center mb-4">
-    Detalle de Compra #{{ $venta->id }}
-</h1>
+    <!-- Información general de la compra -->
+    <div class="mb-4">
 
-<div class="mb-4">
+        <!-- Fecha en la que se realizó la compra -->
+        <p>
+            <strong>Fecha:</strong>
+            {{ $venta->fecha }}
+        </p>
 
-    <p>
-        <strong>Fecha:</strong>
-        {{ $venta->fecha }}
-    </p>
+        <!-- Importe total de la compra -->
+        <p>
+            <strong>Total:</strong>
+            ${{ number_format($venta->total,0,',','.') }}
+        </p>
 
-    <p>
-        <strong>Total:</strong>
-        ${{ number_format($venta->total,0,',','.') }}
-    </p>
+    </div>
 
-</div>
+    <!-- Tabla con el detalle de productos comprados -->
+    <div class="table-responsive">
 
-<div class="table-responsive">
+        <table class="table table-dark table-hover">
 
-    <table class="table table-dark table-hover">
+            <thead>
 
-        <thead>
+                <tr>
 
-            <tr>
+                    <th>Producto</th>
+                    <th>Tamaño</th>
+                    <th>Talle</th>
+                    <th>Cantidad</th>
+                    <th>Precio Unitario</th>
+                    <th>Subtotal</th>
 
-                <th>Producto</th>
-                <th>Tamaño</th>
-                <th>Talle</th>
-                <th>Cantidad</th>
-                <th>Precio Unitario</th>
-                <th>Subtotal</th>
+                </tr>
 
-            </tr>
+            </thead>
 
-        </thead>
+            <tbody>
 
-        <tbody>
+            <!-- Recorre todos los detalles asociados a la venta -->
+            @foreach($venta->detalles as $detalle)
 
-        @foreach($venta->detalles as $detalle)
+                <tr>
 
-            <tr>
+                    <!-- Nombre del producto -->
+                    <td>
+                        {{ $detalle->producto->nombre ?? 'Producto eliminado' }}
+                    </td>
 
-                <td>
-                    {{ $detalle->producto->nombre ?? 'Producto eliminado' }}
-                </td>
+                    <!-- Tamaño seleccionado -->
+                    <td>
+                        {{ $detalle->tamanio }}
+                    </td>
 
-                <td>
-                    {{ $detalle->tamanio }}
-                </td>
+                    <!-- Talle seleccionado -->
+                    <td>
+                        {{ $detalle->talle }}
+                    </td>
 
-                <td>
-                    {{ $detalle->talle }}
-                </td>
+                    <!-- Cantidad comprada -->
+                    <td>
+                        {{ $detalle->cantidad }}
+                    </td>
 
-                <td>
-                    {{ $detalle->cantidad }}
-                </td>
+                    <!-- Precio unitario registrado al momento de la compra -->
+                    <td>
+                        ${{ number_format($detalle->precio_unitario,0,',','.') }}
+                    </td>
 
-                <td>
-                    ${{ number_format($detalle->precio_unitario,0,',','.') }}
-                </td>
+                    <!-- Subtotal calculado (precio × cantidad) -->
+                    <td>
+                        ${{ number_format($detalle->precio_unitario * $detalle->cantidad,0,',','.') }}
+                    </td>
 
-                <td>
-                    ${{ number_format($detalle->precio_unitario * $detalle->cantidad,0,',','.') }}
-                </td>
+                </tr>
 
-            </tr>
+            @endforeach
 
-        @endforeach
+            </tbody>
 
-        </tbody>
+        </table>
 
-    </table>
+    </div>
 
-</div>
+    <!-- Botón para volver al listado de compras -->
+    <div class="mt-4">
 
-<div class="mt-4">
+        <a href="{{ route('mis-compras') }}"
+           class="btn btn-secondary">
 
-    <a href="{{ route('mis-compras') }}"
-       class="btn btn-secondary">
+            Volver a Mis Compras
 
-        Volver a Mis Compras
+        </a>
 
-    </a>
-
-</div>
-
+    </div>
 
 </div>
 

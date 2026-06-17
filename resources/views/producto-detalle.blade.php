@@ -292,23 +292,30 @@
 
 <script>
 
+// Incrementa en 1 la cantidad seleccionada
 function sumarCantidad(){
 
-let c=document.getElementById('cantidad');
+    // Obtiene el campo input con id "cantidad"
+    let c = document.getElementById('cantidad');
 
-c.value=parseInt(c.value)+1;
+    // Convierte el valor actual a entero y le suma 1
+    c.value = parseInt(c.value) + 1;
 
 }
 
+// Disminuye en 1 la cantidad seleccionada
 function restarCantidad(){
 
-let c=document.getElementById('cantidad');
+    // Obtiene el campo input con id "cantidad"
+    let c = document.getElementById('cantidad');
 
-if(parseInt(c.value)>1){
+    // Evita que la cantidad sea menor a 1
+    if(parseInt(c.value) > 1){
 
-c.value=parseInt(c.value)-1;
+        // Convierte el valor actual a entero y le resta 1
+        c.value = parseInt(c.value) - 1;
 
-}
+    }
 
 }
 

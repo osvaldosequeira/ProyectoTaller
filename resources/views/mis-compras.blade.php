@@ -4,70 +4,78 @@
 
 <div class="container my-5">
 
-<h1 class="text-center mb-4">
-    Mis Compras
-</h1>
+    <!-- Título principal de la sección -->
+    <h1 class="text-center mb-4">
+        Mis Compras
+    </h1>
 
-<div class="table-responsive">
+    <!-- Contenedor responsivo para la tabla -->
+    <div class="table-responsive">
 
-    <table class="table table-dark table-hover">
+        <table class="table table-dark table-hover">
 
-        <thead>
-            <tr>
-                <th>ID Venta</th>
-                <th>Fecha</th>
-                <th>Total</th>
-                <th>Acción</th>
-            </tr>
-        </thead>
+            <!-- Encabezado de la tabla -->
+            <thead>
+                <tr>
+                    <th>ID Venta</th>
+                    <th>Fecha</th>
+                    <th>Total</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
 
-        <tbody>
+            <tbody>
 
-        @forelse($ventas as $venta)
+            <!-- Recorre todas las ventas realizadas por el usuario -->
+            @forelse($ventas as $venta)
 
-            <tr>
+                <tr>
 
-                <td>{{ $venta->id }}</td>
+                    <!-- Identificador único de la venta -->
+                    <td>{{ $venta->id }}</td>
 
-                <td>{{ $venta->fecha }}</td>
+                    <!-- Fecha en que se realizó la compra -->
+                    <td>{{ $venta->fecha }}</td>
 
-                <td>
-                    ${{ number_format($venta->total,0,',','.') }}
-                </td>
+                    <!-- Importe total de la venta -->
+                    <td>
+                        ${{ number_format($venta->total,0,',','.') }}
+                    </td>
 
-                <td>
+                    <!-- Botón para visualizar el detalle completo -->
+                    <td>
 
-                    <a href="{{ route('detalle-compra', $venta->id) }}"
-                       class="btn btn-warning btn-sm">
+                        <a href="{{ route('detalle-compra', $venta->id) }}"
+                           class="btn btn-warning btn-sm">
 
-                        Ver Detalle
+                            Ver Detalle
 
-                    </a>
+                        </a>
 
-                </td>
+                    </td>
 
-            </tr>
+                </tr>
 
-        @empty
+            <!-- Mensaje mostrado cuando el usuario no posee compras -->
+            @empty
 
-            <tr>
+                <tr>
 
-                <td colspan="4" class="text-center">
+                    <td colspan="4" class="text-center">
 
-                    No existen compras registradas.
+                        No existen compras registradas.
 
-                </td>
+                    </td>
 
-            </tr>
+                </tr>
 
-        @endforelse
+            @endforelse
 
-        </tbody>
+            </tbody>
 
-    </table>
+        </table>
 
-</div>
-
+    </div>
 
 </div>
 

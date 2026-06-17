@@ -6,8 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class CarritoDetalle extends Model
 {
+    // Especifica la tabla asociada a este modelo.
     protected $table = 'carrito_detalles';
 
+    // Define los campos que pueden ser asignados masivamente.
     protected $fillable = [
         'carrito_id',
         'producto_id',
@@ -17,6 +19,8 @@ class CarritoDetalle extends Model
         'talle'
     ];
 
+    // Relación muchos a uno:
+    // Cada detalle del carrito pertenece a un producto.
     public function producto()
     {
         return $this->belongsTo(
@@ -25,6 +29,8 @@ class CarritoDetalle extends Model
         );
     }
 
+    // Relación muchos a uno:
+    // Cada detalle pertenece a un carrito específico.
     public function carrito()
     {
         return $this->belongsTo(

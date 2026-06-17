@@ -4,99 +4,107 @@
 
 <div class="container my-5">
 
+    <!-- Contenedor principal del formulario de inicio de sesión -->
+    <div class="CONTENEDOR-LOGIN mx-auto text-white">
 
-<div class="CONTENEDOR-LOGIN mx-auto text-white">
+        <!-- Título principal -->
+        <h2 class="TITULO-LOGIN fw-bold text-center mb-4">
 
-    <h2 class="TITULO-LOGIN fw-bold text-center mb-4">
+            INICIAR SESIÓN
 
-        INICIAR SESIÓN
+        </h2>
 
-    </h2>
+        <!-- Muestra los errores de validación o autenticación -->
+        @if ($errors->any())
 
-    @if ($errors->any())
+        <div class="ALERTA-LOGIN alert alert-danger py-2 mb-4">
 
-    <div class="ALERTA-LOGIN alert alert-danger py-2 mb-4">
+            <ul class="LISTA-ERRORES mb-0 small fw-bold">
 
-        <ul class="LISTA-ERRORES mb-0 small fw-bold">
+                <!-- Recorre y muestra todos los errores -->
+                @foreach ($errors->all() as $error)
 
-            @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
 
-                <li>{{ $error }}</li>
+                @endforeach
 
-            @endforeach
-
-        </ul>
-
-    </div>
-
-    @endif
-
-    <form method="POST"
-          action="{{ url('/login') }}">
-
-        @csrf
-
-        <div class="mb-3">
-
-            <label class="LABEL-LOGIN form-label small fw-bold text-uppercase">
-
-                Correo Electrónico
-
-            </label>
-
-            <input type="email"
-                   name="email"
-                   class="form-control INPUT-LOGIN text-white"
-                   value="{{ old('email') }}"
-                   placeholder="ejemplo@gmail.com"
-                   required>
+            </ul>
 
         </div>
 
-        <div class="mb-4">
+        @endif
 
-            <label class="LABEL-LOGIN form-label small fw-bold text-uppercase">
+        <!-- Formulario de inicio de sesión -->
+        <form method="POST"
+              action="{{ url('/login') }}">
 
-                Contraseña
+            <!-- Token CSRF para protección contra ataques -->
+            @csrf
 
-            </label>
+            <!-- Campo de correo electrónico -->
+            <div class="mb-3">
 
-            <input type="password"
-                   name="password"
-                   class="form-control INPUT-LOGIN text-white"
-                   placeholder="Ingresá tu contraseña"
-                   required>
+                <label class="LABEL-LOGIN form-label small fw-bold text-uppercase">
+
+                    Correo Electrónico
+
+                </label>
+
+                <input type="email"
+                       name="email"
+                       class="form-control INPUT-LOGIN text-white"
+                       value="{{ old('email') }}"
+                       placeholder="ejemplo@gmail.com"
+                       required>
+
+            </div>
+
+            <!-- Campo de contraseña -->
+            <div class="mb-4">
+
+                <label class="LABEL-LOGIN form-label small fw-bold text-uppercase">
+
+                    Contraseña
+
+                </label>
+
+                <input type="password"
+                       name="password"
+                       class="form-control INPUT-LOGIN text-white"
+                       placeholder="Ingresá tu contraseña"
+                       required>
+
+            </div>
+
+            <!-- Botón para enviar el formulario -->
+            <button type="submit"
+                    class="BTN-LOGIN w-100 py-3 border-0 fw-bold text-uppercase">
+
+                Ingresar
+
+            </button>
+
+        </form>
+
+        <!-- Enlace para registrarse -->
+        <div class="text-center mt-4">
+
+            <p class="TEXTO-REGISTRO small mb-0">
+
+                ¿No tenés cuenta?
+
+                <a href="{{ url('/registro') }}"
+                   class="LINK-REGISTRO text-decoration-none fw-bold">
+
+                    Registrate acá
+
+                </a>
+
+            </p>
 
         </div>
 
-        <button type="submit"
-                class="BTN-LOGIN w-100 py-3 border-0 fw-bold text-uppercase">
-
-            Ingresar
-
-        </button>
-
-    </form>
-
-    <div class="text-center mt-4">
-
-        <p class="TEXTO-REGISTRO small mb-0">
-
-            ¿No tenés cuenta?
-
-            <a href="{{ url('/registro') }}"
-               class="LINK-REGISTRO text-decoration-none fw-bold">
-
-                Registrate acá
-
-            </a>
-
-        </p>
-
     </div>
-
-</div>
-
 
 </div>
 
