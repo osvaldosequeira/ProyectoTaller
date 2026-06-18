@@ -44,8 +44,13 @@ body { padding-top: 85px; }
 .SUBTITULO-CATALOGO, .SUBTITULO-COMERCIAL { letter-spacing: 2px; color: #94a3b8 !important; }
 
 /* Justificación global de lecturas */
-p, li, .accordion-body, .DESCRIPCION-PRODUCTO, .DESCRIPCION-LOGISTICA, 
-.DESCRIPCION-MYSTERY, .CARD-PRODUCTO p, .CUERPO-PRINCIPAL div {
+p,
+li,
+.accordion-body,
+.DESCRIPCION-PRODUCTO,
+.DESCRIPCION-LOGISTICA,
+.DESCRIPCION-MYSTERY,
+.CARD-PRODUCTO p {
     text-align: justify !important;
     text-justify: inter-word;
 }
